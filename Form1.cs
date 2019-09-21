@@ -117,7 +117,6 @@ namespace Lab1
             Calculate(Convert.ToInt32(posX1_textbox.Text) + 10, Convert.ToInt32(posY1_textbox.Text) + 10, Convert.ToInt32(posX2_textbox.Text) + 10, Convert.ToInt32(posY2_textbox.Text) + 10);
             PaintLine();
             Os_XY();
-
         }
         private void posX1_textbox_Click(object sender, EventArgs e)
         {
