@@ -12,7 +12,9 @@ namespace Lab1
 {
     public partial class Form1 : Form
     {
-        Bitmap mainScreen;
+        const int indent = 20;
+
+        Image mainScreen;
         Bitmap snapshot, tempDraw;  // Снимки
         Color foreColor;            // Цвет
         Brush FirstChar;
@@ -29,11 +31,13 @@ namespace Lab1
 
         private void PaintLine()
         {
-
-            int X1 = Convert.ToInt32(posX1_textbox.Text) * 10 + 100;
-            int Y1 = Convert.ToInt32(posY1_textbox.Text) * 10 + 100;
-            int X2 = Convert.ToInt32(posX2_textbox.Text) * 10 + 100;
-            int Y2 = Convert.ToInt32(posY2_textbox.Text) * 10 + 100;
+            Os_XY();
+            if (mainScreen !=  null)
+                pictureBox1.Image = mainScreen;
+            int X1 = Convert.ToInt32(posX1_textbox.Text) * 10 + indent;
+            int Y1 = Convert.ToInt32(posY1_textbox.Text) * 10 + indent;
+            int X2 = Convert.ToInt32(posX2_textbox.Text) * 10 + indent;
+            int Y2 = Convert.ToInt32(posY2_textbox.Text) * 10 + indent;
 
             textBox1.Text = posX1_textbox.Text;
             textBox2.Text = posY1_textbox.Text;
@@ -44,80 +48,56 @@ namespace Lab1
             Graphics g = pictureBox1.CreateGraphics();
 
             Pen pen = new Pen(foreColor, lineWight);
-            Pen point1 = new Pen(FirstChar, lineWight);
-            Pen point2 = new Pen(SecondChar, lineWight);
+            Pen point1 = new Pen(FirstChar, 1);
+            Pen point2 = new Pen(SecondChar, 1);
 
-            if (tempDraw != null)
-                g.DrawLine(pen, X1, Y1, X2, Y2);
-            g.DrawString(textBox7.Text, new Font("Arial", 10, FontStyle.Bold), FirstChar, X1, Y1);
-            g.DrawRectangle(point1, X1, Y1, 2, 2);
-            g.DrawString(textBox8.Text, new Font("Arial", 10, FontStyle.Bold), SecondChar, X2, Y2);
-            g.DrawRectangle(point2, X2, Y2, 2, 2);
 
-            if ((X1 > 100) && (Y1 > 100))
+            // Рисование основной линии
+            if ((X1 > indent) && (Y1 > indent))
             {
-                Graphics graph = pictureBox1.CreateGraphics();
-                Pen _line1 = new Pen(FirstChar, 1);
-                graph.DrawLine(_line1, X1, Y1, X1, 100);
-                graph.DrawLine(_line1, X1, Y1, 100, Y1);
-                graph.DrawString(posX1_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, X1 - 5, 80);
-                graph.DrawString(posY1_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, 80, Y1 - 5);
-
-                Pen _line2 = new Pen(SecondChar, 1);
-                graph.DrawLine(_line2, X2, Y2, X2, 100);
-                graph.DrawLine(_line2, X2, Y2, 100, Y2);
-                graph.DrawString(posX2_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, X2 - 5, 80);
-                graph.DrawString(posY2_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, 80, Y2 - 5);
+                g.DrawLine(pen, X1, Y1, X2, Y2);
+                g.DrawString(posX1_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, X1 - 5, indent - 20);
+                g.DrawString(posY1_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 20, Y1 - 5);
+                g.DrawString(posX2_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, X2 - 5, indent - 20);
+                g.DrawString(posY2_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 20, Y2 - 5);
             }
 
-            pen.Dispose();
-            point1.Dispose();
-            point2.Dispose();
-            g.Dispose();
+            g.DrawString(equation_txt.Text, new Font("Arial", 7, FontStyle.Bold), Brushes.Black, X1 + 10, Y2 + 10);
             
+            // Рисовать линии к осям OX OY
+            if (checkBox1.Checked == true)
+            {                
+                g.DrawLine(point1, X1, Y1, X1, indent);
+                g.DrawLine(point1, X1, Y1, indent, Y1);                        
+                g.DrawLine(point2, X2, Y2, X2, indent);
+                g.DrawLine(point2, X2, Y2, indent, Y2);
+            }
+
+            // Точки
+            g.DrawString(textBox7.Text, new Font("Arial", 10, FontStyle.Bold), FirstChar, X1, Y1);
+            g.DrawString(textBox8.Text, new Font("Arial", 10, FontStyle.Bold), SecondChar, X2, Y2);
+            g.DrawRectangle(point1, X1, Y1, 2, 2);
+            g.DrawRectangle(point2, X2, Y2, 2, 2);
+
+
         }
 
         private void Os_XY()
         {
+            const int size = 400;
             tempDraw = (Bitmap)snapshot.Clone();
             Graphics g = pictureBox1.CreateGraphics();
             Pen pen = new Pen(Color.Black, 3);
 
-            g.DrawString("20", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, 100, 300);
-            g.DrawString("Y",  new Font("Arial", 10, FontStyle.Bold), Brushes.Black, 80, 300);
-            g.DrawLine(pen, 100, 100, 100, 300);
+            g.DrawString("40", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent, indent + size);
+            g.DrawString("Y",  new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 20, indent + size);
+            g.DrawLine(pen, indent, indent, indent, indent + size);
 
-            g.DrawString("20", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, 300, 100);
-            g.DrawString("X",  new Font("Arial", 10, FontStyle.Bold), Brushes.Black, 300, 80);
-            g.DrawLine(pen, 100, 100, 300, 100);
+            g.DrawString("0", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 15, indent - 20);
 
-            g.DrawString("-5", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, 30, 100);
-            g.DrawString("Y", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, 80, 40);
-            g.DrawLine(pen, 100, 50, 100, 100);
-
-            g.DrawString("-5", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, 100, 30);
-            g.DrawString("X", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, 40, 80);
-            g.DrawLine(pen, 50, 100, 100, 100);
-
-            pen.Dispose();
-            g.Dispose();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Os_XY();
-            Calculate(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
-            //PaintLine();
-        }
-
-        private void MovePoint()
-        {
-            pictureBox1.Image = null;
-            pictureBox1.Update();
-            Calculate(Convert.ToInt32(posX1_textbox.Text) + 10, Convert.ToInt32(posY1_textbox.Text) + 10, Convert.ToInt32(posX2_textbox.Text) + 10, Convert.ToInt32(posY2_textbox.Text) + 10);
-            PaintLine();
-            Os_XY();
-
+            g.DrawString("40", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent + size, indent);
+            g.DrawString("X",  new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent + size, indent - 20);
+            g.DrawLine(pen, indent, indent, indent + size, indent);
         }
         private void posX1_textbox_Click(object sender, EventArgs e)
         {
@@ -200,49 +180,55 @@ namespace Lab1
             textBox8.Text = "";
         }
 
+        /// <summary>
+        /// Изобразить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Update();
+            Calculate(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
+            PaintLine();
+        }
+        /// <summary>
+        /// Отчистить поле
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
-            pictureBox1.Update();
+            pictureBox1.Update();           
             Os_XY();
         }
 
+        /// <summary>
+        /// Случайная линия
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
+            pictureBox1.Image = mainScreen;
             posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999).Next(5, 15).ToString();
-            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1999).Next(5, 15).ToString();
-            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2999).Next(5, 15).ToString();
-            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3999).Next(5, 15).ToString();
+            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1919).Next(5, 15).ToString();
+            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2929).Next(5, 15).ToString();
+            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3939).Next(5, 15).ToString();
+            comboBox1.SelectedIndex = new Random(DateTime.Now.Millisecond + 4949).Next(0, 7);
+            comboBox2.SelectedIndex = new Random(DateTime.Now.Millisecond + 5959).Next(0, 7);
+            pictureBox1.Update();
+            Os_XY();
+            Calculate(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
+            PaintLine();
         }
 
-        private void posX1_textbox_ValueChanged(object sender, EventArgs e)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            MovePoint();
-        }
-
-        private void posX2_textbox_ValueChanged(object sender, EventArgs e)
-        {
-            MovePoint();
-        }
-
-        private void posY1_textbox_ValueChanged(object sender, EventArgs e)
-        {
-            MovePoint();
-        }
-
-        private void posY2_textbox_ValueChanged(object sender, EventArgs e)
-        {
-            MovePoint();
-        }
-
-
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-            posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999).Next(5, 15).ToString();
-            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1999).Next(5, 15).ToString();
-            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2999).Next(5, 15).ToString();
-            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3999).Next(5, 15).ToString();
-            
+            pictureBox1.Image = null;
+            pictureBox1.Update();
+            pictureBox1.Image = mainScreen;
+            PaintLine();
         }
 
         public Form1()
@@ -254,6 +240,12 @@ namespace Lab1
             FirstChar = Brushes.Red;
             SecondChar = Brushes.Green;
             lineWight = 2;
+
+            Os_XY();
+            posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999).Next(5, 15).ToString();
+            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1999).Next(5, 15).ToString();
+            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2999).Next(5, 15).ToString();
+            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3999).Next(5, 15).ToString();
         }
     }
 }

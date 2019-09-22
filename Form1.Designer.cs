@@ -39,15 +39,19 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.posY2_textbox = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.posY1_textbox = new System.Windows.Forms.NumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.posX2_textbox = new System.Windows.Forms.NumericUpDown();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.posX1_textbox = new System.Windows.Forms.NumericUpDown();
             this.equation_txt = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -55,10 +59,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
-            this.posY2_textbox = new System.Windows.Forms.NumericUpDown();
-            this.posY1_textbox = new System.Windows.Forms.NumericUpDown();
-            this.posX2_textbox = new System.Windows.Forms.NumericUpDown();
-            this.posX1_textbox = new System.Windows.Forms.NumericUpDown();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.posY2_textbox)).BeginInit();
@@ -178,10 +179,18 @@
             this.groupBox1.Controls.Add(this.textBox8);
             this.groupBox1.Location = new System.Drawing.Point(516, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(300, 170);
+            this.groupBox1.Size = new System.Drawing.Size(300, 140);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Уравнение прямой";
+            // 
+            // posY2_textbox
+            // 
+            this.posY2_textbox.Location = new System.Drawing.Point(197, 52);
+            this.posY2_textbox.Name = "posY2_textbox";
+            this.posY2_textbox.Size = new System.Drawing.Size(46, 20);
+            this.posY2_textbox.TabIndex = 38;
+            this.posY2_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label14
             // 
@@ -203,6 +212,14 @@
             this.label15.TabIndex = 39;
             this.label15.Text = "(";
             // 
+            // posY1_textbox
+            // 
+            this.posY1_textbox.Location = new System.Drawing.Point(197, 26);
+            this.posY1_textbox.Name = "posY1_textbox";
+            this.posY1_textbox.Size = new System.Drawing.Size(46, 20);
+            this.posY1_textbox.TabIndex = 37;
+            this.posY1_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -222,6 +239,14 @@
             this.label17.Size = new System.Drawing.Size(38, 17);
             this.label17.TabIndex = 43;
             this.label17.Text = ", 1 )";
+            // 
+            // posX2_textbox
+            // 
+            this.posX2_textbox.Location = new System.Drawing.Point(135, 52);
+            this.posX2_textbox.Name = "posX2_textbox";
+            this.posX2_textbox.Size = new System.Drawing.Size(46, 20);
+            this.posX2_textbox.TabIndex = 36;
+            this.posX2_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button3
             // 
@@ -272,6 +297,14 @@
             this.button1.Text = "Изобразить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // posX1_textbox
+            // 
+            this.posX1_textbox.Location = new System.Drawing.Point(135, 26);
+            this.posX1_textbox.Name = "posX1_textbox";
+            this.posX1_textbox.Size = new System.Drawing.Size(46, 20);
+            this.posX1_textbox.TabIndex = 35;
+            this.posX1_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // equation_txt
             // 
@@ -357,41 +390,18 @@
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox8.Click += new System.EventHandler(this.textBox8_Click);
             // 
-            // posY2_textbox
+            // checkBox1
             // 
-            this.posY2_textbox.Location = new System.Drawing.Point(197, 52);
-            this.posY2_textbox.Name = "posY2_textbox";
-            this.posY2_textbox.Size = new System.Drawing.Size(46, 20);
-            this.posY2_textbox.TabIndex = 38;
-            this.posY2_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.posY2_textbox.ValueChanged += new System.EventHandler(this.posY2_textbox_ValueChanged);
-            // 
-            // posY1_textbox
-            // 
-            this.posY1_textbox.Location = new System.Drawing.Point(197, 26);
-            this.posY1_textbox.Name = "posY1_textbox";
-            this.posY1_textbox.Size = new System.Drawing.Size(46, 20);
-            this.posY1_textbox.TabIndex = 37;
-            this.posY1_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.posY1_textbox.ValueChanged += new System.EventHandler(this.posY1_textbox_ValueChanged);
-            // 
-            // posX2_textbox
-            // 
-            this.posX2_textbox.Location = new System.Drawing.Point(135, 52);
-            this.posX2_textbox.Name = "posX2_textbox";
-            this.posX2_textbox.Size = new System.Drawing.Size(46, 20);
-            this.posX2_textbox.TabIndex = 36;
-            this.posX2_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.posX2_textbox.ValueChanged += new System.EventHandler(this.posX2_textbox_ValueChanged);
-            // 
-            // posX1_textbox
-            // 
-            this.posX1_textbox.Location = new System.Drawing.Point(135, 26);
-            this.posX1_textbox.Name = "posX1_textbox";
-            this.posX1_textbox.Size = new System.Drawing.Size(46, 20);
-            this.posX1_textbox.TabIndex = 35;
-            this.posX1_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.posX1_textbox.ValueChanged += new System.EventHandler(this.posX1_textbox_ValueChanged);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(516, 158);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(145, 17);
+            this.checkBox1.TabIndex = 51;
+            this.checkBox1.Text = "Рисовать линии к осям";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // Form1
             // 
@@ -399,6 +409,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(834, 479);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
@@ -413,7 +424,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Shown += new System.EventHandler(this.Form1_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -459,6 +469,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
