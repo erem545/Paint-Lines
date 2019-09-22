@@ -51,26 +51,33 @@ namespace Lab1
             Pen point1 = new Pen(FirstChar, 1);
             Pen point2 = new Pen(SecondChar, 1);
 
-
-            // Рисование основной линии
-            if ((X1 > indent) && (Y1 > indent))
-            {
-                g.DrawLine(pen, X1, Y1, X2, Y2);
-                g.DrawString(posX1_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, X1 - 5, indent - 20);
-                g.DrawString(posY1_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 20, Y1 - 5);
-                g.DrawString(posX2_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, X2 - 5, indent - 20);
-                g.DrawString(posY2_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 20, Y2 - 5);
-            }
-
+            // Рисовать уравнение
             g.DrawString(equation_txt.Text, new Font("Arial", 7, FontStyle.Bold), Brushes.Black, X1 + 10, Y2 + 10);
             
             // Рисовать линии к осям OX OY
             if (checkBox1.Checked == true)
-            {                
-                g.DrawLine(point1, X1, Y1, X1, indent);
-                g.DrawLine(point1, X1, Y1, indent, Y1);                        
-                g.DrawLine(point2, X2, Y2, X2, indent);
-                g.DrawLine(point2, X2, Y2, indent, Y2);
+            {
+                for (int i1 = Y1; i1 > indent; i1 -= 3)
+                {
+                    g.DrawLine(point1, X1, i1 - 3, X1, i1);
+                    i1 -= 3;
+                }
+                for (int i2 = X1; i2 > indent; i2 -= 3)
+                {
+                    g.DrawLine(point1, i2 - 3, Y1, i2, Y1);
+                    i2 -= 3;
+                }
+
+                for (int i3 = Y2; i3 > indent; i3 -= 3)
+                {
+                    g.DrawLine(point2, X2, i3 , X2, i3 - 3);
+                    i3 -= 3;
+                }
+                for (int i4 = X2; i4 > indent; i4 -= 3)
+                {
+                    g.DrawLine(point2, i4, Y2, i4 - 3, Y2);
+                    i4 -= 3;
+                }
             }
 
             // Точки
@@ -79,6 +86,14 @@ namespace Lab1
             g.DrawRectangle(point1, X1, Y1, 2, 2);
             g.DrawRectangle(point2, X2, Y2, 2, 2);
 
+
+
+            // Рисовать основной линии
+            g.DrawLine(pen, X1, Y1, X2, Y2);
+            g.DrawString(posX1_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, X1 - 5, indent - 20);
+            g.DrawString(posY1_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 20, Y1 - 5);
+            g.DrawString(posX2_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, X2 - 5, indent - 20);
+            g.DrawString(posY2_textbox.Text, new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 20, Y2 - 5);
 
         }
 
@@ -227,7 +242,6 @@ namespace Lab1
         {
             pictureBox1.Image = null;
             pictureBox1.Update();
-            pictureBox1.Image = mainScreen;
             PaintLine();
         }
 
@@ -236,9 +250,7 @@ namespace Lab1
             InitializeComponent();
             snapshot = new Bitmap(pictureBox1.ClientRectangle.Width, pictureBox1.ClientRectangle.Height);
             tempDraw = (Bitmap)snapshot.Clone();
-            foreColor = Color.Gray;
-            FirstChar = Brushes.Red;
-            SecondChar = Brushes.Green;
+            foreColor = Color.LightSlateGray;
             lineWight = 2;
 
             Os_XY();
