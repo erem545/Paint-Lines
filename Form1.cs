@@ -13,7 +13,8 @@ namespace Lab1
     public partial class Form1 : Form
     {
         const int indent = 20;
-
+        List<List<object>> LinesList;
+        List<object> tempList;
         Image mainScreen;
         Bitmap snapshot, tempDraw;  // Снимки
         Color foreColor;            // Цвет
@@ -28,17 +29,67 @@ namespace Lab1
             int _k = (posX1 * posY2) - (posX2 * posY1);
             equation_txt.Text = $"{_i}x {_j}y {_k}";
         }
+        /// Вставить объект Line в список tempList
+        /// </summary>
+        /// <param name="_line">Объект класса Line</param>
+        private void InsertInList(Line _line)
+        {
+            if (tempList == null)
+            {
+                tempList = new List<object>();
+            }
+            tempList.Add(_line.NameLine + ": " + equation_txt.Text);
+            tempList.Add(_line.Point1.posX);
+            tempList.Add(_line.Point1.posY);
+            tempList.Add(_line.Point2.posX);
+            tempList.Add(_line.Point2.posY);
+            InsertInList(tempList);
+            tempList = null;
+        }
+        /// <summary>
+        /// Вставить список tempList в список LinesList
+        /// </summary>
+        /// <param name="_list">Список со списками List</param>
+        private void InsertInList(List<object> _list)
+        {
+            if (LinesList == null)
+            {
+                LinesList = new List<List<object>>();
+            }
+            LinesList.Add(_list);
+            RefreshDataGrid(LinesList);
+        }
+
+        private void RefreshDataGrid(List<List<object>> mainList)
+        {
+            dataGridView1.Rows.Clear();
+            for (int i = 0; i < mainList.Count; i++)
+            {
+                dataGridView1.Rows.Add();
+                for (int j = 0; j < 5; j++)
+                {
+                    dataGridView1.Rows[i].Cells[j].Value = mainList.ElementAt(i).ElementAt(j);
+                }              
+            }
+        }
 
         private void PaintLine()
         {
             Os_XY();
             if (mainScreen !=  null)
                 pictureBox1.Image = mainScreen;
+
+            // Создание объектов класса
+            Point FirstPoint = new Point(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text));
+            Point SecondPoint = new Point(Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
+            Line line = new Line(firstName_txt.Text, FirstPoint, secondName_txt.Text, SecondPoint);
+            InsertInList(line);
             int X1 = Convert.ToInt32(posX1_textbox.Text) * 10 + indent;
             int Y1 = Convert.ToInt32(posY1_textbox.Text) * 10 + indent;
             int X2 = Convert.ToInt32(posX2_textbox.Text) * 10 + indent;
             int Y2 = Convert.ToInt32(posY2_textbox.Text) * 10 + indent;
 
+            // Отображение последних координат
             textBox1.Text = posX1_textbox.Text;
             textBox2.Text = posY1_textbox.Text;
             textBox3.Text = posX2_textbox.Text;
@@ -47,6 +98,7 @@ namespace Lab1
             tempDraw = (Bitmap)snapshot.Clone();
             Graphics g = pictureBox1.CreateGraphics();
 
+            // Инструменты
             Pen pen = new Pen(foreColor, lineWight);
             Pen point1 = new Pen(FirstChar, 1);
             Pen point2 = new Pen(SecondChar, 1);
