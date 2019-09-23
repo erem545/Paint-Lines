@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,10 +19,10 @@ namespace Lab1
         List<object> tempList;
         Image mainScreen;
         Bitmap snapshot, tempDraw;  // Снимки
-        Color foreColor;            // Цвет
-        Brush FirstChar;
-        Brush SecondChar; // Цвет букв
-        int lineWight;              // Ширина
+        Color foreColor;            // Цвет линии
+        Brush FirstChar;// Цвет букв
+        Brush SecondChar;            
+        int lineWight;              // Ширина линии
 
         private void Calculate(int posX1, int posY1, int posX2, int posY2)
         {
@@ -274,6 +275,53 @@ namespace Lab1
                               "Изобразить - создает прямую по заданным параметрам" + Environment.NewLine +
                               "Отчистить - отчищает рабочую область" + Environment.NewLine +
                               "Рисовать линии к осям - отображает линии к осям OX OY", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            lineWight = Convert.ToInt32(numericUpDown1.Value);
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            Color col = new Color();
+            switch (numericUpDown2.Value)
+            {
+                case 0:
+                    col = ColorTranslator.FromHtml("#000000");
+                    break;
+                case 1:
+                    col = ColorTranslator.FromHtml("#0d0d0d");
+                    break;
+                case 2:
+                    col = ColorTranslator.FromHtml("#1a1a1a");
+                    break;
+                case 3:
+                    col = ColorTranslator.FromHtml("#262626");
+                    break;
+                case 4:
+                    col = ColorTranslator.FromHtml("#333333");
+                    break;
+                case 5:
+                    col = ColorTranslator.FromHtml("#404040");
+                    break;
+                case 6:
+                    col = ColorTranslator.FromHtml("#4d4d4d");
+                    break;
+                case 7:
+                    col = ColorTranslator.FromHtml("#595959");
+                    break;
+                case 8:
+                    col = ColorTranslator.FromHtml("#666666");
+                    break;
+                case 9:
+                    col = ColorTranslator.FromHtml("#737373");
+                    break;
+                case 10:
+                    col = ColorTranslator.FromHtml("#808080");
+                    break;
+            }
+            foreColor = col;
         }
 
         public Form1()
