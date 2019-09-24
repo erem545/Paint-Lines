@@ -13,6 +13,7 @@ namespace Lab1
 {
     public partial class Form1 : Form
     {
+        bool ok = false;
         const int indent = 30; // Отступ от начала экрана
         List<List<object>> LinesList; // Список прямых (Список в списке)
         List<object> tempList; // Дополнительный список
@@ -102,52 +103,53 @@ namespace Lab1
             LinesList = listSafe;  
         }
 
-        private void DrawLine(List<object> _list)
+        private void DrawLinesOnList(List<List<object>> list)
         {
-            foreach(Line el in _list)
+            List<object> line;
+            for (int i = 0; i < list.Count; ++i)
             {
-                PaintLine(el.Point1.posX, el.Point1.posY, el.Point2.posX, el.Point2.posY);
+                line = list[i];
+                Line _t = new Line
+                    (
+                        line[0].ToString()[0].ToString(),
+                        new Point(Convert.ToInt32(line[1]),
+                                  Convert.ToInt32(line[2])),
+                             
+                        line[0].ToString()[1].ToString(),
+                        new Point(Convert.ToInt32(line[3]),
+                                  Convert.ToInt32(line[4]))
+                   );
+                _t.Color1 = FirstChar;
+                _t.Color2 = SecondChar;
+                PaintLine(_t);                               
             }
         }
-        private void DrawLineOnList(List<List<object>> _list)
-        {
-            foreach (List<object> el in _list)
-            {
-                DrawLine(el);
-            }
-        }
-
 
         /// <summary>
         /// Рисует линию по указанным параметрам
         /// </summary>
-        private void PaintLine(int _x1, int _y1, int _x2, int _y2)
+        private void PaintLine(Line _line)
         {         
             Os_XY();
-
-            // Создание объектов класса
-            Point FirstPoint = new Point(_x1, _y1);
-            Point SecondPoint = new Point(_x2, _y2);
-            Line line = new Line(firstName_txt.Text, FirstPoint, secondName_txt.Text, SecondPoint);
-            InsertInList(line);
-
+           
             /* Конвертирование значений из textBox'ов
                Умножаем на 10 (Размер деления) 
             */
-            int X1 = Convert.ToInt32(posX1_textbox.Text) * 10 + indent;
-            int Y1 = Convert.ToInt32(posY1_textbox.Text) * 10 + indent;
-            int X2 = Convert.ToInt32(posX2_textbox.Text) * 10 + indent;
-            int Y2 = Convert.ToInt32(posY2_textbox.Text) * 10 + indent;
+            int X1 = Convert.ToInt32(_line.Point1.posX ) * 10 + indent;
+            int Y1 = Convert.ToInt32(_line.Point1.posY ) * 10 + indent;
+            int X2 = Convert.ToInt32(_line.Point2.posX) * 10 + indent;
+            int Y2 = Convert.ToInt32(_line.Point2.posY) * 10 + indent;
 
             // Отображение последних координат
-            textBox1.Text = posX1_textbox.Text;
-            textBox2.Text = posY1_textbox.Text;
-            textBox3.Text = posX2_textbox.Text;
-            textBox4.Text = posY2_textbox.Text;
+            textBox1.Text = _line.Point1.posX.ToString();
+            textBox2.Text = _line.Point1.posY.ToString();
+            textBox3.Text = _line.Point2.posX.ToString();
+            textBox4.Text = _line.Point2.posY.ToString();
 
             tempDraw = (Bitmap)snapshot.Clone();
             Graphics g = pictureBox1.CreateGraphics();
 
+            // Цвета
             foreColor = selectColor();
 
             // Инструменты
@@ -189,14 +191,14 @@ namespace Lab1
 
             // Рисовать основной линии
             g.DrawLine(pen, X1, Y1, X2, Y2);
-            g.DrawString(posX1_textbox.Text, new Font("Arial", 10), Brushes.Black, X1 - 5, indent - 20);
-            g.DrawString(posY1_textbox.Text, new Font("Arial", 10), Brushes.Black, indent - 20, Y1 - 5);
-            g.DrawString(posX2_textbox.Text, new Font("Arial", 10), Brushes.Black, X2 - 5, indent - 20);
-            g.DrawString(posY2_textbox.Text, new Font("Arial", 10), Brushes.Black, indent - 20, Y2 - 5);
+            g.DrawString(_line.Point1.posX.ToString(), new Font("Arial", 10), Brushes.Black, X1 - 5, indent - 20);
+            g.DrawString(_line.Point1.posY.ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y1 - 5);
+            g.DrawString(_line.Point2.posX.ToString(), new Font("Arial", 10), Brushes.Black, X2 - 5, indent - 20);
+            g.DrawString(_line.Point2.posY.ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y2 - 5);
 
             // Точки
-            g.DrawString(firstName_txt.Text, new Font("Arial", 12, FontStyle.Bold), FirstChar, X1, Y1);
-            g.DrawString(secondName_txt.Text, new Font("Arial", 12, FontStyle.Bold), SecondChar, X2, Y2);
+            g.DrawString(_line.NameLine[0].ToString(), new Font("Arial", 12, FontStyle.Bold), FirstChar, X1, Y1);
+            g.DrawString(_line.NameLine[1].ToString(), new Font("Arial", 12, FontStyle.Bold), SecondChar, X2, Y2);
             g.DrawRectangle(point1, X1, Y1, 2, 2);
             g.DrawRectangle(point2, X2, Y2, 2, 2);
         }
@@ -301,7 +303,13 @@ namespace Lab1
         {
             pictureBox1.Update();
             Calculate(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
-            PaintLine(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));          
+            Line _t = new Line(
+                         firstName_txt.Text,
+                         new Point(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text)),
+                         secondName_txt.Text,
+                         new Point(Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text)));
+            PaintLine(_t);
+            InsertInList(_t);
         }
 
         /// <summary>
@@ -310,25 +318,33 @@ namespace Lab1
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
-        {     
+        {           
+            RandomLine();
+            pictureBox1.Update();
+            Calculate(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
+            Line _t = new Line(
+                         firstName_txt.Text,
+                         new Point(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text)),
+                         secondName_txt.Text,
+                         new Point(Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text)));
+            PaintLine(_t);
+            InsertInList(_t);
+        }
+        private void RandomLine()
+        {
             Random rnd1 = new Random(DateTime.Now.Millisecond + 1111 + DateTime.Now.Minute);
             char char1 = (char)rnd1.Next(0x0041, 0x005A);
             Random rnd2 = new Random(DateTime.Now.Millisecond + 2222 + DateTime.Now.Minute);
             char char2 = (char)rnd2.Next(0x0041, 0x005A);
-
             firstName_txt.Text = char1.ToString();
             secondName_txt.Text = char2.ToString();
-
             posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999).Next(5, 15).ToString();
             posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1919).Next(5, 15).ToString();
             posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2929).Next(5, 15).ToString();
             posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3939).Next(5, 15).ToString();
             comboBox1.SelectedIndex = new Random(DateTime.Now.Millisecond + 4949).Next(0, 7);
             comboBox2.SelectedIndex = new Random(DateTime.Now.Millisecond + 5959).Next(0, 7);
-
-            pictureBox1.Update();
-            Calculate(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
-            PaintLine(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));           
+            
         }
 
         /// <summary>
@@ -354,7 +370,6 @@ namespace Lab1
                               "Используйте кнопку изобразить для построения фигур из прямых."
                               , "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             lineWight = Convert.ToInt32(numericUpDown1.Value);
@@ -414,7 +429,10 @@ namespace Lab1
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            pictureBox1.Image = null;
+            pictureBox1.Update();
+            FillListWithTable();
+            DrawLinesOnList(LinesList);
         }
 
         public Form1()
