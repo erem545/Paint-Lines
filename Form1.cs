@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace Lab1
 {
     public partial class Form1 : Form
-    {       
+    {
         const int indent = 30; // Отступ от начала экрана
         List<List<object>> LinesList; // Список прямых (Список в списке)
         List<object> tempList; // Дополнительный список
@@ -53,7 +53,6 @@ namespace Lab1
             InsertInList(tempList);
             tempList = null;
         }
-
         /// <summary>
         /// Вставить список tempList в список LinesList
         /// </summary>
@@ -63,23 +62,61 @@ namespace Lab1
             if (LinesList == null)
                 LinesList = new List<List<object>>();
             LinesList.Add(_list);
-            RefreshDataGrid(LinesList);
+            FillTableWithList(LinesList);
         }
-
         /// <summary>
-        /// Обновление таблицы
+        /// Заполнение datagridview данными из списка
         /// </summary>
-        /// <param name="mainList"></param>
-        private void RefreshDataGrid(List<List<object>> mainList)
+        /// <param name="mainList">Список</param>
+        private void FillTableWithList(List<List<object>> mainList)
         {
-            dataGridView1.Rows.Clear();
+            dataGridView1.Rows.Clear();            
             for (int i = 0; i < mainList.Count; i++)
             {
                 dataGridView1.Rows.Add();
-                for (int j = 0; j < 5; j++)
-                    dataGridView1.Rows[i].Cells[j].Value = mainList.ElementAt(i).ElementAt(j);
+                dataGridView1[0, i].Value = mainList.ElementAt(i).ElementAt(0);
+                dataGridView1[1, i].Value = mainList.ElementAt(i).ElementAt(1);
+                dataGridView1[2, i].Value = mainList.ElementAt(i).ElementAt(2);
+                dataGridView1[3, i].Value = mainList.ElementAt(i).ElementAt(3);
+                dataGridView1[4, i].Value = mainList.ElementAt(i).ElementAt(4);
+            }
+            FillListWithTable();
+        }
+        /// <summary>
+        /// Заполнение списка данными из datagridview
+        /// </summary>
+        private void FillListWithTable()
+        {
+            List<List<object>> listSafe = new List<List<object>>();
+            List<object> tmpList = new List<object>();
+            for (int i = 0; i < dataGridView1.RowCount - 1; i++)
+            {
+                tmpList.Add(dataGridView1.Rows[i].Cells[0].Value);
+                tmpList.Add(dataGridView1.Rows[i].Cells[1].Value);
+                tmpList.Add(dataGridView1.Rows[i].Cells[2].Value);
+                tmpList.Add(dataGridView1.Rows[i].Cells[3].Value);
+                tmpList.Add(dataGridView1.Rows[i].Cells[4].Value);
+                listSafe.Add(new List<object>(tmpList));
+                tmpList.Clear();
+            }
+            LinesList = listSafe;  
+        }
+
+        private void DrawLine(List<object> _list)
+        {
+            foreach(Line el in _list)
+            {
+                PaintLine(el.Point1.posX, el.Point1.posY, el.Point2.posX, el.Point2.posY);
             }
         }
+        private void DrawLineOnList(List<List<object>> _list)
+        {
+            foreach (List<object> el in _list)
+            {
+                DrawLine(el);
+            }
+        }
+
 
         /// <summary>
         /// Рисует линию по указанным параметрам
@@ -273,7 +310,7 @@ namespace Lab1
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
-        {
+        {     
             Random rnd1 = new Random(DateTime.Now.Millisecond + 1111 + DateTime.Now.Minute);
             char char1 = (char)rnd1.Next(0x0041, 0x005A);
             Random rnd2 = new Random(DateTime.Now.Millisecond + 2222 + DateTime.Now.Minute);
@@ -291,7 +328,7 @@ namespace Lab1
 
             pictureBox1.Update();
             Calculate(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
-            PaintLine(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
+            PaintLine(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));           
         }
 
         /// <summary>
@@ -322,7 +359,6 @@ namespace Lab1
         {
             lineWight = Convert.ToInt32(numericUpDown1.Value);
         }
-
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
             foreColor = selectColor();
@@ -369,42 +405,16 @@ namespace Lab1
             return col;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {          
-            int index = dataGridView1.CurrentRow.Index;
+        private void button7_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = null;
+            pictureBox1.Update();
+            Os_XY();
+        }
 
-            // Если чекбокс активирован
-            if (dataGridView1.Rows[index].Cells[0].Value.ToString() != "true")
-            {
-                List<List<object>> tmpList = new List<List<object>>();
-                if (index == 0)
-                {                   
-                    for (int i = 1; i < LinesList.Count; i++)
-                    {
-                        if (dataGridView1.Rows[index].Cells[5].Value.ToString() == "true")
-                            tmpList.Add(LinesList.ElementAt(i));
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < index; i++)
-                    {
-                        if (dataGridView1.Rows[i].Cells[5].Value.ToString() == "true")
-                            tmpList.Add(LinesList.ElementAt(i));
-                    }
+        private void button6_Click(object sender, EventArgs e)
+        {
 
-                    for (int i = index + 1; i < LinesList.Count; i++)
-                    {
-                        if (dataGridView1.Rows[i].Cells[5].Value.ToString() == "true")
-                            tmpList.Add(LinesList.ElementAt(i));
-                    }
-                }   
-                
-            } // Если чекбокс деактивирован
-            else
-            {
-
-            }
         }
 
         public Form1()
@@ -417,10 +427,10 @@ namespace Lab1
             FirstChar = Brushes.Red;
             SecondChar = Brushes.Green;
             Os_XY();
-            posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999).Next(5, 25).ToString();
-            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1999).Next(5, 25).ToString();
-            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2999).Next(5, 25).ToString();
-            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3999).Next(5, 25).ToString();
+            posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999  - DateTime.Now.Millisecond*1).Next(5, 25).ToString();
+            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1999 - DateTime.Now.Millisecond/2).Next(5, 25).ToString();
+            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2999 - DateTime.Now.Millisecond*3).Next(5, 25).ToString();
+            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3999 - DateTime.Now.Millisecond/4).Next(5, 25).ToString();
         }
     }
 }

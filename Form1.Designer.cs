@@ -47,7 +47,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.posX2_textbox = new System.Windows.Forms.NumericUpDown();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -59,7 +58,13 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.secondName_txt = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.column_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_X1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Y1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_X2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Y2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -67,14 +72,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.column_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_X1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Y1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_X2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Y2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.posY2_textbox)).BeginInit();
@@ -185,7 +186,6 @@
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.posX2_textbox);
             this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.button1);
@@ -197,9 +197,9 @@
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.secondName_txt);
-            this.groupBox1.Location = new System.Drawing.Point(518, 395);
+            this.groupBox1.Location = new System.Drawing.Point(516, 322);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(362, 140);
+            this.groupBox1.Size = new System.Drawing.Size(298, 140);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Уравнение прямой";
@@ -277,16 +277,6 @@
             this.button3.Text = "Случайные";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(265, 111);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 23);
-            this.button2.TabIndex = 34;
-            this.button2.Text = "Отчистить все";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label18
             // 
@@ -408,6 +398,16 @@
             this.secondName_txt.Text = "B";
             this.secondName_txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(202, 172);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(91, 23);
+            this.button2.TabIndex = 34;
+            this.button2.Text = "Отчистить все";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -421,15 +421,48 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(297, 143);
+            this.dataGridView1.Size = new System.Drawing.Size(287, 143);
             this.dataGridView1.TabIndex = 52;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // column_Name
+            // 
+            this.column_Name.HeaderText = "Прямая";
+            this.column_Name.Name = "column_Name";
+            this.column_Name.ReadOnly = true;
+            // 
+            // column_X1
+            // 
+            this.column_X1.FillWeight = 40F;
+            this.column_X1.HeaderText = "X1";
+            this.column_X1.Name = "column_X1";
+            this.column_X1.Width = 40;
+            // 
+            // column_Y1
+            // 
+            this.column_Y1.FillWeight = 40F;
+            this.column_Y1.HeaderText = "Y1";
+            this.column_Y1.Name = "column_Y1";
+            this.column_Y1.Width = 40;
+            // 
+            // column_X2
+            // 
+            this.column_X2.FillWeight = 40F;
+            this.column_X2.HeaderText = "X2";
+            this.column_X2.Name = "column_X2";
+            this.column_X2.Width = 40;
+            // 
+            // column_Y2
+            // 
+            this.column_Y2.FillWeight = 40F;
+            this.column_Y2.HeaderText = "Y2";
+            this.column_Y2.Name = "column_Y2";
+            this.column_Y2.Width = 40;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(6, 423);
+            this.button4.Location = new System.Drawing.Point(165, 468);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(62, 23);
+            this.button4.Size = new System.Drawing.Size(85, 23);
             this.button4.TabIndex = 53;
             this.button4.Text = "Справка";
             this.button4.UseVisualStyleBackColor = true;
@@ -442,9 +475,9 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Location = new System.Drawing.Point(516, 302);
+            this.groupBox2.Location = new System.Drawing.Point(516, 215);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(362, 87);
+            this.groupBox2.Size = new System.Drawing.Size(298, 101);
             this.groupBox2.TabIndex = 54;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Настройка";
@@ -452,7 +485,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 54);
+            this.label6.Location = new System.Drawing.Point(6, 40);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 13);
             this.label6.TabIndex = 62;
@@ -460,7 +493,7 @@
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(106, 52);
+            this.numericUpDown2.Location = new System.Drawing.Point(101, 38);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             10,
             0,
@@ -478,7 +511,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 30);
+            this.label5.Location = new System.Drawing.Point(6, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 13);
             this.label5.TabIndex = 60;
@@ -486,7 +519,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(106, 28);
+            this.numericUpDown1.Location = new System.Drawing.Point(101, 14);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             5,
             0,
@@ -506,87 +539,62 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(158, 54);
+            this.checkBox1.Location = new System.Drawing.Point(6, 64);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(145, 17);
             this.checkBox1.TabIndex = 58;
             this.checkBox1.Text = "Рисовать линии к осям";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // column_Name
-            // 
-            this.column_Name.HeaderText = "Прямая";
-            this.column_Name.Name = "column_Name";
-            this.column_Name.ReadOnly = true;
-            // 
-            // column_X1
-            // 
-            this.column_X1.FillWeight = 40F;
-            this.column_X1.HeaderText = "X1";
-            this.column_X1.Name = "column_X1";
-            this.column_X1.ReadOnly = true;
-            this.column_X1.Width = 40;
-            // 
-            // column_Y1
-            // 
-            this.column_Y1.FillWeight = 40F;
-            this.column_Y1.HeaderText = "Y1";
-            this.column_Y1.Name = "column_Y1";
-            this.column_Y1.ReadOnly = true;
-            this.column_Y1.Width = 40;
-            // 
-            // column_X2
-            // 
-            this.column_X2.FillWeight = 40F;
-            this.column_X2.HeaderText = "X2";
-            this.column_X2.Name = "column_X2";
-            this.column_X2.ReadOnly = true;
-            this.column_X2.Width = 40;
-            // 
-            // column_Y2
-            // 
-            this.column_Y2.FillWeight = 40F;
-            this.column_Y2.HeaderText = "Y2";
-            this.column_Y2.Name = "column_Y2";
-            this.column_Y2.ReadOnly = true;
-            this.column_Y2.Width = 40;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.Controls.Add(this.button5);
             this.groupBox3.Controls.Add(this.dataGridView1);
+            this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Location = new System.Drawing.Point(516, 8);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(407, 244);
+            this.groupBox3.Size = new System.Drawing.Size(298, 201);
             this.groupBox3.TabIndex = 55;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Работа с данными";
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(6, 172);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(92, 23);
+            this.button6.TabIndex = 54;
+            this.button6.Text = "Изобразить";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(309, 17);
+            this.button5.Location = new System.Drawing.Point(104, 172);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(92, 23);
             this.button5.TabIndex = 53;
             this.button5.Text = "Удалить";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // button7
             // 
-            this.button6.Location = new System.Drawing.Point(309, 42);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(92, 23);
-            this.button6.TabIndex = 54;
-            this.button6.Text = "Обновить";
-            this.button6.UseVisualStyleBackColor = true;
+            this.button7.Location = new System.Drawing.Point(74, 469);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(85, 23);
+            this.button7.TabIndex = 56;
+            this.button7.Text = "Отчистить";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(935, 567);
+            this.ClientSize = new System.Drawing.Size(826, 499);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button4);
@@ -663,14 +671,15 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_X1;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_Y1;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_X2;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_Y2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button7;
     }
 }
 
