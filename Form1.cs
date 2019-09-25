@@ -13,8 +13,10 @@ namespace Lab1
 {
     public partial class Form1 : Form
     {
-        bool ok = false;
+        bool ok = true;
         const int indent = 30; // Отступ от начала экрана
+        const int sizeDiv = 20; // Размер деления
+
         List<List<object>> LinesList; // Список прямых (Список в списке)
         List<object> tempList; // Дополнительный список
         Bitmap snapshot, tempDraw; // Снимки
@@ -102,7 +104,10 @@ namespace Lab1
             }
             LinesList = listSafe;  
         }
-
+        /// <summary>
+        /// Рисование линий по данным datagridview
+        /// </summary>
+        /// <param name="list"></param>
         private void DrawLinesOnList(List<List<object>> list)
         {
             List<object> line;
@@ -119,32 +124,22 @@ namespace Lab1
                         new Point(Convert.ToInt32(line[3]),
                                   Convert.ToInt32(line[4]))
                    );
-                _t.Color1 = FirstChar;
-                _t.Color2 = SecondChar;
                 PaintLine(_t);                               
             }
         }
 
         /// <summary>
-        /// Рисует линию по указанным параметрам
+        /// Рисует линию из объекта Line
         /// </summary>
         private void PaintLine(Line _line)
         {         
-            Os_XY();
-           
             /* Конвертирование значений из textBox'ов
                Умножаем на 10 (Размер деления) 
             */
-            int X1 = Convert.ToInt32(_line.Point1.posX ) * 10 + indent;
-            int Y1 = Convert.ToInt32(_line.Point1.posY ) * 10 + indent;
-            int X2 = Convert.ToInt32(_line.Point2.posX) * 10 + indent;
-            int Y2 = Convert.ToInt32(_line.Point2.posY) * 10 + indent;
-
-            // Отображение последних координат
-            textBox1.Text = _line.Point1.posX.ToString();
-            textBox2.Text = _line.Point1.posY.ToString();
-            textBox3.Text = _line.Point2.posX.ToString();
-            textBox4.Text = _line.Point2.posY.ToString();
+            int X1 = Convert.ToInt32(_line.Point1.posX ) * sizeDiv + indent;
+            int Y1 = Convert.ToInt32(_line.Point1.posY ) * sizeDiv + indent;
+            int X2 = Convert.ToInt32(_line.Point2.posX) * sizeDiv + indent;
+            int Y2 = Convert.ToInt32(_line.Point2.posY) * sizeDiv + indent;
 
             tempDraw = (Bitmap)snapshot.Clone();
             Graphics g = pictureBox1.CreateGraphics();
@@ -156,10 +151,26 @@ namespace Lab1
             Pen pen = new Pen(foreColor, lineWight);
             Pen point1 = new Pen(FirstChar, 1);
             Pen point2 = new Pen(SecondChar, 1);
-            
+
+            Pen point11 = new Pen(FirstChar, 2);
+            Pen point12 = new Pen(SecondChar, 2);
             // Рисовать уравнение
-            g.DrawString(equation_txt.Text, new Font("Arial", 9, FontStyle.Bold), Brushes.Black, X1 + 10, Y2 + 10);
-            
+            //g.DrawString(equation_txt.Text, new Font("Arial", 9, FontStyle.Bold), Brushes.Black, X1 + 10, Y2 + 10);
+
+            // Рисовать точки 
+            g.DrawRectangle(point11, X1, Y1, 2, 2);
+            g.DrawRectangle(point12, X2, Y2, 2, 2);
+            g.DrawString(_line.Point1.posX.ToString(), new Font("Arial", 10), Brushes.Black, X1 - 5, indent - 20);
+            g.DrawString(_line.Point1.posY.ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y1 - 5);
+            g.DrawString(_line.Point2.posX.ToString(), new Font("Arial", 10), Brushes.Black, X2 - 5, indent - 20);
+            g.DrawString(_line.Point2.posY.ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y2 - 5);
+
+            // Рисовать основной линии
+            if (checkBox3.Checked == true)
+            {
+                g.DrawLine(pen, X1, Y1, X2, Y2);
+            }
+
             // Рисовать линии к осям OX OY
             if (checkBox1.Checked == true)
             {
@@ -168,7 +179,7 @@ namespace Lab1
                 const int length = 4;
 
                 for (int i1 = Y1; i1 > indent; i1 -= length)
-                {
+                {   
                     g.DrawLine(point1, X1, i1 - length, X1, i1);
                     i1 -= length;
                 }
@@ -189,18 +200,12 @@ namespace Lab1
                 }
             }
 
-            // Рисовать основной линии
-            g.DrawLine(pen, X1, Y1, X2, Y2);
-            g.DrawString(_line.Point1.posX.ToString(), new Font("Arial", 10), Brushes.Black, X1 - 5, indent - 20);
-            g.DrawString(_line.Point1.posY.ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y1 - 5);
-            g.DrawString(_line.Point2.posX.ToString(), new Font("Arial", 10), Brushes.Black, X2 - 5, indent - 20);
-            g.DrawString(_line.Point2.posY.ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y2 - 5);
-
-            // Точки
-            g.DrawString(_line.NameLine[0].ToString(), new Font("Arial", 12, FontStyle.Bold), FirstChar, X1, Y1);
-            g.DrawString(_line.NameLine[1].ToString(), new Font("Arial", 12, FontStyle.Bold), SecondChar, X2, Y2);
-            g.DrawRectangle(point1, X1, Y1, 2, 2);
-            g.DrawRectangle(point2, X2, Y2, 2, 2);
+            // Рисовать наименования точек
+            if (checkBox2.Checked == true)
+            {            
+                g.DrawString(_line.NameLine[0].ToString(), new Font("Arial", 12, FontStyle.Bold), FirstChar, X1, Y1);
+                g.DrawString(_line.NameLine[1].ToString(), new Font("Arial", 12, FontStyle.Bold), SecondChar, X2, Y2);
+            }
         }
 
         /// <summary>
@@ -208,27 +213,62 @@ namespace Lab1
         /// </summary>
         private void Os_XY()
         {
-            // Размер оси координат
-            const int size = 300;
+            pictureBox1.Image = null;
+            pictureBox1.Update();
+            ok = false;
+            const int size = 30 * sizeDiv; // Размер оси координат          
+            const int lenght = 7; // Длинна прочерков
 
             tempDraw = (Bitmap)snapshot.Clone();
             Graphics g = pictureBox1.CreateGraphics();
             Pen pen = new Pen(Color.Black, 3);
+            Pen line = new Pen(Brushes.LightGray, 1);
+            Pen line1 = new Pen(Brushes.Black, 1);
+            // Рисовать разметку по X
+            for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
+            {
+                for (int j = indent; j <= size + sizeDiv; j += lenght - 4)
+                {
+                    g.DrawLine(line, i, j, i, j += lenght);
+                }
+            }
+            // Рисовать разметку по Y
+            for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
+            {
+                for (int j = indent; j <= size + sizeDiv; j += lenght - 4)
+                {
+                    g.DrawLine(line, j, i, j += lenght, i);
+                }
+            }
 
             // Ось OX
-            g.DrawString((size / 10).ToString(), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent + size, indent);
+            g.DrawString((size / sizeDiv).ToString(), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent + size, indent);
             g.DrawString("X", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent + size, indent - 20);
             g.DrawLine(pen, indent, indent, indent + size, indent);
 
             // Ось OY
-            g.DrawString((size / 10).ToString(), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent, indent + size);
+            g.DrawString((size / sizeDiv).ToString(), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent, indent + size);
             g.DrawString("Y",  new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 20, indent + size);
             g.DrawLine(pen, indent, indent, indent, indent + size);
 
-            // Начало
+            // Рисовать даления на линии оси X
+            for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
+            {
+                g.DrawLine(line1, i, indent - 3, i, indent + 3);
+            }
+            // Рисовать даления на линии оси Y
+            for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
+            {
+                g.DrawLine(line1, indent - 3, i, indent + 3, i);
+            }
+
+
+            // Подписать точку начала
             g.DrawString("0", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 15, indent - 20);
+
         }
 
+        #region Change Color
         /// <summary>
         /// Смена цвета первой точки
         /// </summary>
@@ -293,91 +333,10 @@ namespace Lab1
                     break;
             }
         }
-
         /// <summary>
-        /// Изобразить
+        /// Цвет основной линии
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Update();
-            Calculate(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
-            Line _t = new Line(
-                         firstName_txt.Text,
-                         new Point(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text)),
-                         secondName_txt.Text,
-                         new Point(Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text)));
-            PaintLine(_t);
-            InsertInList(_t);
-        }
-
-        /// <summary>
-        /// Случайная линия
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button3_Click(object sender, EventArgs e)
-        {           
-            RandomLine();
-            pictureBox1.Update();
-            Calculate(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
-            Line _t = new Line(
-                         firstName_txt.Text,
-                         new Point(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text)),
-                         secondName_txt.Text,
-                         new Point(Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text)));
-            PaintLine(_t);
-            InsertInList(_t);
-        }
-        private void RandomLine()
-        {
-            Random rnd1 = new Random(DateTime.Now.Millisecond + 1111 + DateTime.Now.Minute);
-            char char1 = (char)rnd1.Next(0x0041, 0x005A);
-            Random rnd2 = new Random(DateTime.Now.Millisecond + 2222 + DateTime.Now.Minute);
-            char char2 = (char)rnd2.Next(0x0041, 0x005A);
-            firstName_txt.Text = char1.ToString();
-            secondName_txt.Text = char2.ToString();
-            posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999).Next(5, 15).ToString();
-            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1919).Next(5, 15).ToString();
-            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2929).Next(5, 15).ToString();
-            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3939).Next(5, 15).ToString();
-            comboBox1.SelectedIndex = new Random(DateTime.Now.Millisecond + 4949).Next(0, 7);
-            comboBox2.SelectedIndex = new Random(DateTime.Now.Millisecond + 5959).Next(0, 7);
-            
-        }
-
-        /// <summary>
-        /// Отчистить поле
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Image = null;
-            pictureBox1.Update();
-            dataGridView1.Rows.Clear();
-            LinesList = null;
-            Os_XY();
-        }
-        private void button4_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(@"Случайные - создает случайную Прямую с заданными именами Точек" + Environment.NewLine + 
-                              "Изобразить - создает прямую по заданным параметрам" + Environment.NewLine +
-                              "Отчистить - отчищает рабочую область" + Environment.NewLine +
-                              "Рисовать линии к осям - отображает линии к осям OX OY" + Environment.NewLine +
-                              " - - - - - - - - - - - - - - - - - - - - - - - - - -" + Environment.NewLine +
-                              "Используйте кнопку изобразить для построения фигур из прямых."
-                              , "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            lineWight = Convert.ToInt32(numericUpDown1.Value);
-        }
-        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
-        {
-            foreColor = selectColor();
-        }
+        /// <returns></returns>
         private Color selectColor()
         {
             Color col = new Color();
@@ -419,20 +378,164 @@ namespace Lab1
             }
             return col;
         }
+        #endregion
 
-        private void button7_Click(object sender, EventArgs e)
+        #region General button for draw lines
+
+        /// <summary>
+        /// Рисование линии
+        /// </summary>
+        private void DrawLine()
+        {
+            pictureBox1.Update();
+            Calculate(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text), Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text));
+            Line _t = new Line(
+                         firstName_txt.Text,
+                         new Point(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text)),
+                         secondName_txt.Text,
+                         new Point(Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text)));
+            PaintLine(_t);
+            InsertInList(_t);
+        }
+
+        /// <summary>
+        /// Кнопка Изобразить 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (ok)
+                Os_XY();
+            DrawLine();
+        }
+        /// <summary>
+        /// Кнопка Отчистить все (в т.ч. datagridview)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button2_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
             pictureBox1.Update();
+            dataGridView1.Rows.Clear();
+            LinesList = null;
+            Os_XY();
+        }
+        /// <summary>
+        /// Кнопка Случайная линия
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (ok)
+                Os_XY();
+            RandomLine();
+            DrawLine();
+        }
+
+        private void RandomLine()
+        {
+            Random rnd1 = new Random(DateTime.Now.Millisecond + 1111 + DateTime.Now.Minute);
+            char char1 = (char)rnd1.Next(0x0041, 0x005A);
+            Random rnd2 = new Random(DateTime.Now.Millisecond + 2222 + DateTime.Now.Minute);
+            char char2 = (char)rnd2.Next(0x0041, 0x005A);
+            firstName_txt.Text = char1.ToString();
+            secondName_txt.Text = char2.ToString();
+            posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999).Next(5, 15).ToString();
+            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1919).Next(5, 15).ToString();
+            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2929).Next(5, 15).ToString();
+            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3939).Next(5, 15).ToString();
+            comboBox1.SelectedIndex = new Random(DateTime.Now.Millisecond + 4949).Next(0, 7);
+            comboBox2.SelectedIndex = new Random(DateTime.Now.Millisecond + 5959).Next(0, 7);
+            
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Кнопка Справка
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(@"Случайные - создает случайную Прямую с заданными именами Точек" + Environment.NewLine + 
+                              "Изобразить - создает прямую по заданным параметрам" + Environment.NewLine +
+                              "Отчистить - отчищает рабочую область" + Environment.NewLine +
+                              "Рисовать линии к осям - отображает линии к осям OX OY" + Environment.NewLine +
+                              " - - - - - - - - - - - - - - - - - - - - - - - - - -" + Environment.NewLine +
+                              "Используйте кнопку изобразить для построения фигур из прямых."
+                              , "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        
+        /// <summary>
+        /// Кнопка Отчистить (Поле)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button7_Click(object sender, EventArgs e)
+        {
             Os_XY();
         }
 
+        /// <summary>
+        /// Изобразить линии по данным datagridview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = null;
-            pictureBox1.Update();
+            if (ok)
+                Os_XY();
             FillListWithTable();
             DrawLinesOnList(LinesList);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //dataGridView1.SelectedRows
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (LinesList != null)
+            {
+                //if (ok)
+                    Os_XY();
+                DrawLinesOnList(LinesList);
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (LinesList != null)
+            {
+                //if (ok)
+                    Os_XY();
+                DrawLinesOnList(LinesList);
+            }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+            {
+            if (LinesList != null)
+            {
+                //if (ok)
+                    Os_XY();
+                DrawLinesOnList(LinesList);
+            }
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            lineWight = Convert.ToInt32(numericUpDown1.Value);
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            foreColor = selectColor();
         }
 
         public Form1()
@@ -444,7 +547,6 @@ namespace Lab1
             lineWight = 2;
             FirstChar = Brushes.Red;
             SecondChar = Brushes.Green;
-            Os_XY();
             posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999  - DateTime.Now.Millisecond*1).Next(5, 25).ToString();
             posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1999 - DateTime.Now.Millisecond/2).Next(5, 25).ToString();
             posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2999 - DateTime.Now.Millisecond*3).Next(5, 25).ToString();

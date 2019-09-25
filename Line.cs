@@ -14,9 +14,6 @@ namespace Lab1
         public string NameLine { get; set; }
         public string Equation { get; set; }
 
-        public Brush Color1;
-        public Brush Color2;
-
         public Line()
         {
             Point1 = null;
