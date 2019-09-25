@@ -112,7 +112,7 @@
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.secondName_txt);
-            this.groupBox1.Location = new System.Drawing.Point(684, 219);
+            this.groupBox1.Location = new System.Drawing.Point(684, 392);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(298, 150);
             this.groupBox1.TabIndex = 18;
@@ -185,7 +185,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(6, 80);
+            this.button3.Location = new System.Drawing.Point(152, 78);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(91, 23);
             this.button3.TabIndex = 34;
@@ -215,7 +215,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(104, 80);
+            this.button1.Location = new System.Drawing.Point(7, 78);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 23);
             this.button1.TabIndex = 27;
@@ -315,7 +315,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(202, 172);
+            this.button2.Location = new System.Drawing.Point(202, 345);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(91, 23);
             this.button2.TabIndex = 34;
@@ -336,7 +336,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(287, 143);
+            this.dataGridView1.Size = new System.Drawing.Size(287, 320);
             this.dataGridView1.TabIndex = 52;
             // 
             // column_Name
@@ -374,7 +374,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(683, 473);
+            this.button4.Location = new System.Drawing.Point(683, 646);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(85, 23);
             this.button4.TabIndex = 53;
@@ -391,7 +391,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Location = new System.Drawing.Point(683, 375);
+            this.groupBox2.Location = new System.Drawing.Point(683, 548);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(299, 92);
             this.groupBox2.TabIndex = 54;
@@ -499,14 +499,14 @@
             this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Location = new System.Drawing.Point(684, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(298, 201);
+            this.groupBox3.Size = new System.Drawing.Size(298, 374);
             this.groupBox3.TabIndex = 55;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Работа с данными";
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(6, 172);
+            this.button6.Location = new System.Drawing.Point(6, 345);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(92, 23);
             this.button6.TabIndex = 54;
@@ -516,7 +516,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(104, 172);
+            this.button5.Location = new System.Drawing.Point(104, 345);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(92, 23);
             this.button5.TabIndex = 53;
@@ -526,7 +526,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(774, 473);
+            this.button7.Location = new System.Drawing.Point(774, 646);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(85, 23);
             this.button7.TabIndex = 56;

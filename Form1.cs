@@ -443,10 +443,10 @@ namespace Lab1
             char char2 = (char)rnd2.Next(0x0041, 0x005A);
             firstName_txt.Text = char1.ToString();
             secondName_txt.Text = char2.ToString();
-            posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999).Next(5, 15).ToString();
-            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1919).Next(5, 15).ToString();
-            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2929).Next(5, 15).ToString();
-            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3939).Next(5, 15).ToString();
+            posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 15 * 999).Next(5, 25).ToString();
+            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 25 * 1999).Next(5, 25).ToString();
+            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 35 * 2999).Next(5, 25).ToString();
+            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 45 * 3999).Next(5, 25).ToString();
             comboBox1.SelectedIndex = new Random(DateTime.Now.Millisecond + 4949).Next(0, 7);
             comboBox2.SelectedIndex = new Random(DateTime.Now.Millisecond + 5959).Next(0, 7);
             
@@ -504,8 +504,6 @@ namespace Lab1
             dataGridView1.Rows.RemoveAt(index);
             dataGridView1.Refresh();
             FillListWithTable();
-            Os_XY();
-            DrawLinesOnList(LinesList);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -557,10 +555,6 @@ namespace Lab1
             lineWight = 2;
             FirstChar = Brushes.Red;
             SecondChar = Brushes.Green;
-            posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999  - DateTime.Now.Millisecond*1).Next(5, 15).ToString();
-            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1999 - DateTime.Now.Millisecond/2).Next(5, 15).ToString();
-            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2999 - DateTime.Now.Millisecond*3).Next(15, 25).ToString();
-            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3999 - DateTime.Now.Millisecond/4).Next(15, 25).ToString();
         }
     }
 }
