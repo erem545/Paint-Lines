@@ -487,15 +487,25 @@ namespace Lab1
         /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
-            if (ok)
+            //if (ok)
                 Os_XY();
             FillListWithTable();
             DrawLinesOnList(LinesList);
         }
 
+        /// <summary>
+        /// Удалить прямую из datagridview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
-            //dataGridView1.SelectedRows
+            int index = dataGridView1.CurrentRow.Index;
+            dataGridView1.Rows.RemoveAt(index);
+            dataGridView1.Refresh();
+            FillListWithTable();
+            Os_XY();
+            DrawLinesOnList(LinesList);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -547,10 +557,10 @@ namespace Lab1
             lineWight = 2;
             FirstChar = Brushes.Red;
             SecondChar = Brushes.Green;
-            posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999  - DateTime.Now.Millisecond*1).Next(5, 25).ToString();
-            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1999 - DateTime.Now.Millisecond/2).Next(5, 25).ToString();
-            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2999 - DateTime.Now.Millisecond*3).Next(5, 25).ToString();
-            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3999 - DateTime.Now.Millisecond/4).Next(5, 25).ToString();
+            posX1_textbox.Text = new Random(DateTime.Now.Millisecond + 999  - DateTime.Now.Millisecond*1).Next(5, 15).ToString();
+            posY1_textbox.Text = new Random(DateTime.Now.Millisecond + 1999 - DateTime.Now.Millisecond/2).Next(5, 15).ToString();
+            posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 2999 - DateTime.Now.Millisecond*3).Next(15, 25).ToString();
+            posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 3999 - DateTime.Now.Millisecond/4).Next(15, 25).ToString();
         }
     }
 }
