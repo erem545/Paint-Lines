@@ -48,7 +48,7 @@ namespace Lab1
         {
             if (tempList == null)
                 tempList = new List<object>();
-            tempList.Add(_line.NameLine + ": " + equation_txt.Text);
+            tempList.Add(_line.NameLine);
             tempList.Add(_line.Point1.posX);
             tempList.Add(_line.Point1.posY);
             tempList.Add(_line.Point2.posX);
@@ -110,21 +110,29 @@ namespace Lab1
         /// <param name="list"></param>
         private void DrawLinesOnList(List<List<object>> list)
         {
-            List<object> line;
-            for (int i = 0; i < list.Count; ++i)
+            List<object> line = new List<object>();
+            try
             {
-                line = list[i];
-                Line _t = new Line
-                    (
-                        line[0].ToString()[0].ToString(),
-                        new Point(Convert.ToInt32(line[1]),
-                                  Convert.ToInt32(line[2])),
-                             
-                        line[0].ToString()[1].ToString(),
-                        new Point(Convert.ToInt32(line[3]),
-                                  Convert.ToInt32(line[4]))
-                   );
-                PaintLine(_t);                               
+                for (int i = 0; i < list.Count; ++i)
+                {
+                    line = list[i];
+                    Line _t = new Line
+                        (
+                            line[0].ToString()[0].ToString(),
+                            new Point(Convert.ToInt32(line[1]),
+                                      Convert.ToInt32(line[2])),
+
+                            line[0].ToString()[1].ToString(),
+                            new Point(Convert.ToInt32(line[3]),
+                                      Convert.ToInt32(line[4]))
+                       );
+                    PaintLine(_t);
+                }
+            }
+            catch (NullReferenceException)
+            {                             
+                LinesList.RemoveAt(LinesList.Count - 1);
+                dataGridView1.Rows.RemoveAt(LinesList.Count);
             }
         }
 
@@ -217,29 +225,24 @@ namespace Lab1
             pictureBox1.Update();
             ok = false;
             const int size = 30 * sizeDiv; // Размер оси координат          
-            const int lenght = 7; // Длинна прочерков
+            
 
             tempDraw = (Bitmap)snapshot.Clone();
             Graphics g = pictureBox1.CreateGraphics();
             Pen pen = new Pen(Color.Black, 3);
             Pen line = new Pen(Brushes.LightGray, 1);
             Pen line1 = new Pen(Brushes.Black, 1);
-            // Рисовать разметку по X
-            for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
-            {
-                for (int j = indent; j <= size + sizeDiv; j += lenght - 4)
-                {
-                    g.DrawLine(line, i, j, i, j += lenght);
-                }
-            }
-            // Рисовать разметку по Y
-            for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
-            {
-                for (int j = indent; j <= size + sizeDiv; j += lenght - 4)
-                {
-                    g.DrawLine(line, j, i, j += lenght, i);
-                }
-            }
+
+            //const int lenght = 7; // Длинна прочерков
+            // // Рисовать разметку по X
+            // for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
+            //     for (int j = indent; j <= size + sizeDiv; j += lenght - 4)
+            //         g.DrawLine(line, i, j, i, j += lenght);
+            // // Рисовать разметку по Y
+            // for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
+            //     for (int j = indent; j <= size + sizeDiv; j += lenght - 4)
+            //         g.DrawLine(line, j, i, j += lenght, i);
+
 
             // Ось OX
             g.DrawString((size / sizeDiv).ToString(), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent + size, indent);
@@ -448,8 +451,7 @@ namespace Lab1
             posX2_textbox.Text = new Random(DateTime.Now.Millisecond + 35 * 2999).Next(5, 25).ToString();
             posY2_textbox.Text = new Random(DateTime.Now.Millisecond + 45 * 3999).Next(5, 25).ToString();
             comboBox1.SelectedIndex = new Random(DateTime.Now.Millisecond + 4949).Next(0, 7);
-            comboBox2.SelectedIndex = new Random(DateTime.Now.Millisecond + 5959).Next(0, 7);
-            
+            comboBox2.SelectedIndex = new Random(DateTime.Now.Millisecond + 5959).Next(0, 7);         
         }
 
         #endregion
@@ -461,9 +463,15 @@ namespace Lab1
         /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(@"Случайные - создает случайную Прямую с заданными именами Точек" + Environment.NewLine + 
-                              "Изобразить - создает прямую по заданным параметрам" + Environment.NewLine +
-                              "Отчистить - отчищает рабочую область" + Environment.NewLine +
+            MessageBox.Show(@"УПРАВЛЕНИЕ ПРЯМОЙ " + Environment.NewLine + 
+                              "Случайные - создает случайную прямую" + Environment.NewLine + 
+                              "Изобразить прямую - создает прямую по заданным параметрам" + Environment.NewLine +
+                              "РАБОТА С ДАННЫМИ" + Environment.NewLine +
+                              "Изобразить - изобразить все прямые из списка" + Environment.NewLine +
+                              "Удалить - удалить прямую из списка" + Environment.NewLine +
+                              "Отчистить все - отчищает все данные" + Environment.NewLine +
+                              "НАСТРОЙКА" + Environment.NewLine +
+                              "Показать линии" + Environment.NewLine +
                               "Рисовать линии к осям - отображает линии к осям OX OY" + Environment.NewLine +
                               " - - - - - - - - - - - - - - - - - - - - - - - - - -" + Environment.NewLine +
                               "Используйте кнопку изобразить для построения фигур из прямых."
