@@ -18,7 +18,6 @@ namespace Lab1
         {
             Point1 = null;
             Point2 = null;
-            Equation = "";
         }
         public Line(string name1 ,Point _point1, string name2, Point _point2)
         {
@@ -28,7 +27,6 @@ namespace Lab1
             int _i = _point1.posY - _point2.posY;
             int _j = _point2.posX - _point1.posX;
             int _k = (_point1.posX * _point2.posY) - (_point2.posX * _point1.posY);
-            Equation = $"{_i}x {_j}y {_k}";
         }
     }
 }
