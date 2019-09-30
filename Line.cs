@@ -12,7 +12,6 @@ namespace Lab1
         public Point Point1 { get; set; }
         public Point Point2 { get; set; }
         public string NameLine { get; set; }
-        public string Equation { get; set; }
 
         public Line()
         {
@@ -24,9 +23,6 @@ namespace Lab1
             Point1 = _point1;
             Point2 = _point2;
             NameLine = name1 + name2;
-            int _i = _point1.posY - _point2.posY;
-            int _j = _point2.posX - _point1.posX;
-            int _k = (_point1.posX * _point2.posY) - (_point2.posX * _point1.posY);
         }
     }
 }

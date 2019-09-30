@@ -240,7 +240,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(287, 273);
             this.dataGridView1.TabIndex = 52;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
+            this.dataGridView1.Click += new System.EventHandler(this.button1_Click);
             // 
             // column_Name
             // 
@@ -312,7 +312,6 @@
             this.checkBox3.TabIndex = 64;
             this.checkBox3.Text = "Показать линии";
             this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -325,7 +324,6 @@
             this.checkBox2.TabIndex = 63;
             this.checkBox2.Text = "Наимен. точек";
             this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // label6
             // 
@@ -392,7 +390,6 @@
             this.checkBox1.TabIndex = 58;
             this.checkBox1.Text = "Линии к осям";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -445,8 +442,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(660, 645);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             // 
             // SelectRectangle_btn
             // 

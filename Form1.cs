@@ -23,14 +23,13 @@ namespace Lab1
         /// Размер деления
         /// </summary>
         const int sizeDiv = 20;
-        int X, Y;
 
         List<List<object>> LinesList; // Список прямых (Список в списке)
         List<object> tempList; // Дополнительный список
         Bitmap snapshot, tempDraw; // Снимки
+        //Bitmap linesScreen, tempLinesScreen; // Главный экран с линиями
         Bitmap groupDraw, tempGroupDraw; // группировка
         Color foreColor; // Цвет основной линии
-        Brush moreColor; // Цвет первого символа       
         int lineWight; // Ширина линии
 
 
@@ -61,6 +60,7 @@ namespace Lab1
             if (LinesList == null)
                 LinesList = new List<List<object>>();
             LinesList.Add(_list);
+            dataGridView1.Rows.Add();
             FillTableWithList(LinesList);
         }
         /// <summary>
@@ -69,17 +69,17 @@ namespace Lab1
         /// <param name="mainList">Список</param>
         private void FillTableWithList(List<List<object>> mainList)
         {
-            dataGridView1.Rows.Clear();            
-            for (int i = 0; i < mainList.Count; i++)
+            if (mainList.Count > 0)
             {
-                dataGridView1.Rows.Add();
-                dataGridView1[0, i].Value = mainList.ElementAt(i).ElementAt(0);
-                dataGridView1[1, i].Value = mainList.ElementAt(i).ElementAt(1);
-                dataGridView1[2, i].Value = mainList.ElementAt(i).ElementAt(2);
-                dataGridView1[3, i].Value = mainList.ElementAt(i).ElementAt(3);
-                dataGridView1[4, i].Value = mainList.ElementAt(i).ElementAt(4);
+                for (int i = 0; i < mainList.Count; i++)
+                {
+                    dataGridView1[0, i].Value = mainList.ElementAt(i).ElementAt(0);
+                    dataGridView1[1, i].Value = mainList.ElementAt(i).ElementAt(1);
+                    dataGridView1[2, i].Value = mainList.ElementAt(i).ElementAt(2);
+                    dataGridView1[3, i].Value = mainList.ElementAt(i).ElementAt(3);
+                    dataGridView1[4, i].Value = mainList.ElementAt(i).ElementAt(4);
+                }
             }
-            FillListWithTable();
         }
         /// <summary>
         /// Заполнение списка данными из datagridview
@@ -106,6 +106,9 @@ namespace Lab1
         /// <param name="list"></param>
         private void DrawLinesOnList(List<List<object>> list)
         {
+            Graphics g = Graphics.FromImage(snapshot);
+            g.Clear(Color.White);
+            Os_XY();
             List<object> line = new List<object>();
             try
             {
@@ -122,7 +125,7 @@ namespace Lab1
                             new Point(Convert.ToInt32(line[3]),
                                       Convert.ToInt32(line[4]))
                        );
-                    PaintLine(_t, selectColor(), 2);
+                    PaintLine(ref snapshot, _t, selectColor(), 2);
                 }
             }
             catch (NullReferenceException)
@@ -137,28 +140,26 @@ namespace Lab1
         /// <summary>
         /// Рисует линию из объекта Line
         /// </summary>
-        private void PaintLine(Line _line, Color color, int _lineWeight)
+        private void PaintLine(ref Bitmap screen, Line _line, Color color, int _lineWeight)
         {         
             int X1 = Convert.ToInt32(_line.Point1.posX ) * sizeDiv + indent;
             int Y1 = Convert.ToInt32(_line.Point1.posY ) * sizeDiv + indent;
             int X2 = Convert.ToInt32(_line.Point2.posX) * sizeDiv + indent;
             int Y2 = Convert.ToInt32(_line.Point2.posY) * sizeDiv + indent;
 
-            tempDraw = (Bitmap)snapshot.Clone();
-            Graphics g = pictureBox1.CreateGraphics();      
+            tempDraw = screen;
+            Graphics g = Graphics.FromImage(tempDraw);
             // Цвета
             foreColor = selectColor();
 
             // Инструменты
             Pen pen = new Pen(color, _lineWeight);
-            Pen point1 = new Pen(moreColor, 1);
-            Pen point2 = new Pen(moreColor, 1);
-            Pen point11 = new Pen(moreColor, 2);
-            Pen point12 = new Pen(moreColor, 2);
+            Pen point = new Pen(color, 3);
+            Pen linesXY = new Pen(color, 1);
 
             // Рисовать точки 
-            g.DrawRectangle(point11, X1, Y1, 2, 2);
-            g.DrawRectangle(point12, X2, Y2, 2, 2);
+            g.DrawRectangle(point, X1, Y1, 2, 2);
+            g.DrawRectangle(point, X2, Y2, 2, 2);
 
 
             g.DrawString(Convert.ToInt32(_line.Point1.posX).ToString(), new Font("Arial", 10), Brushes.Black, X1 - 5, indent - 20);
@@ -181,22 +182,22 @@ namespace Lab1
 
                 for (int i1 = Y1; i1 > indent; i1 -= length)
                 {   
-                    g.DrawLine(point1, X1, i1 - length, X1, i1);
+                    g.DrawLine(linesXY, X1, i1 - length, X1, i1);
                     i1 -= length;
                 }
                 for (int i2 = X1; i2 > indent; i2 -= length)
                 {
-                    g.DrawLine(point1, i2 - length, Y1, i2, Y1);
+                    g.DrawLine(linesXY, i2 - length, Y1, i2, Y1);
                     i2 -= length;
                 }
                 for (int i3 = Y2; i3 > indent; i3 -= length)
                 {
-                    g.DrawLine(point2, X2, i3 , X2, i3 - length);
+                    g.DrawLine(linesXY, X2, i3 , X2, i3 - length);
                     i3 -= length;
                 }
                 for (int i4 = X2; i4 > indent; i4 -= length)
                 {
-                    g.DrawLine(point2, i4, Y2, i4 - length, Y2);
+                    g.DrawLine(linesXY, i4, Y2, i4 - length, Y2);
                     i4 -= length;
                 }
             }
@@ -204,138 +205,29 @@ namespace Lab1
             // Рисовать наименования точек
             if (checkBox2.Checked == true)
             {            
-                g.DrawString(_line.NameLine[0].ToString(), new Font("Arial", 12, FontStyle.Bold), moreColor, X1, Y1);
-                g.DrawString(_line.NameLine[1].ToString(), new Font("Arial", 12, FontStyle.Bold), moreColor, X2, Y2);
+                g.DrawString(_line.NameLine[0].ToString(), new Font("Arial", 12, FontStyle.Bold), Brushes.Black, X1, Y1);
+                g.DrawString(_line.NameLine[1].ToString(), new Font("Arial", 12, FontStyle.Bold), Brushes.Black, X2, Y2);
             }
+            
+            screen = (Bitmap)tempDraw.Clone();
         }
         private void PaintRectangle(Line _line1, Line _line2, Line _line3, Line _line4)
         {
-            int X1 = Convert.ToInt32(_line1.Point1.posX) * sizeDiv + indent;
-            int Y1 = Convert.ToInt32(_line1.Point1.posY) * sizeDiv + indent;
-            int X2 = Convert.ToInt32(_line2.Point1.posX) * sizeDiv + indent;
-            int Y2 = Convert.ToInt32(_line2.Point1.posY) * sizeDiv + indent;
-            int X3 = Convert.ToInt32(_line3.Point1.posX) * sizeDiv + indent;
-            int Y3 = Convert.ToInt32(_line3.Point1.posY) * sizeDiv + indent;
-            int X4 = Convert.ToInt32(_line4.Point1.posX) * sizeDiv + indent;
-            int Y4 = Convert.ToInt32(_line4.Point1.posY) * sizeDiv + indent;
-
-            tempDraw = (Bitmap)snapshot.Clone();
-            Graphics g = pictureBox1.CreateGraphics();
-
-            // Цвета
-            foreColor = selectColor();
-
-            // Инструменты
-            Pen pen = new Pen(foreColor, lineWight);
-
-            Pen point1 = new Pen(moreColor, 1);
-            Pen point2 = new Pen(moreColor, 1);
-            Pen point3 = new Pen(moreColor, 1);
-            Pen point4 = new Pen(moreColor, 1);
-            Pen point11 = new Pen(moreColor, 2);
-            Pen point12 = new Pen(moreColor, 2);
-            Pen point13 = new Pen(moreColor, 2);
-            Pen point14 = new Pen(moreColor, 2);
-
-            // Рисовать точки 
-            g.DrawRectangle(point11, X1, Y1, 2, 2);
-            g.DrawRectangle(point12, X2, Y2, 2, 2);
-            g.DrawRectangle(point13, X3, Y3, 2, 2);
-            g.DrawRectangle(point14, X4, Y4, 2, 2);
-
-            g.DrawString(Convert.ToInt32(_line1.Point1.posX).ToString(), new Font("Arial", 10), Brushes.Black, X1 - 5, indent - 20);
-            g.DrawString(Convert.ToInt32(_line1.Point1.posY).ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y1 - 5);
-            g.DrawString(Convert.ToInt32(_line2.Point1.posX).ToString(), new Font("Arial", 10), Brushes.Black, X2 - 5, indent - 20);
-            g.DrawString(Convert.ToInt32(_line2.Point1.posY).ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y2 - 5);
-            g.DrawString(Convert.ToInt32(_line3.Point1.posX).ToString(), new Font("Arial", 10), Brushes.Black, X3 - 5, indent - 20);
-            g.DrawString(Convert.ToInt32(_line3.Point1.posY).ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y3 - 5);
-            g.DrawString(Convert.ToInt32(_line4.Point1.posX).ToString(), new Font("Arial", 10), Brushes.Black, X4 - 5, indent - 20);
-            g.DrawString(Convert.ToInt32(_line4.Point1.posY).ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y4 - 5);
-
-            // Рисовать основных линиий
-            if (checkBox3.Checked == true)
-            {
-                g.DrawLine(pen, X1, Y1, X2, Y2);
-                g.DrawLine(pen, X2, Y2, X3, Y3);
-                g.DrawLine(pen, X3, Y3, X4, Y4);
-                g.DrawLine(pen, X4, Y4, X1, Y1);
-            }
-
-            // Рисовать линии к осям OX OY
-            if (checkBox1.Checked == true)
-            {
-                // Циклы для рисования прерывестых линий
-                // Константа размера прочерков
-                const int length = 4;
-
-                for (int i1 = Y1; i1 > indent; i1 -= length)
-                {
-                    g.DrawLine(point1, X1, i1 - length, X1, i1);
-                    i1 -= length;
-                }
-                for (int i2 = X1; i2 > indent; i2 -= length)
-                {
-                    g.DrawLine(point1, i2 - length, Y1, i2, Y1);
-                    i2 -= length;
-                }
-
-                for (int i3 = Y2; i3 > indent; i3 -= length)
-                {
-                    g.DrawLine(point2, X2, i3, X2, i3 - length);
-                    i3 -= length;
-                }
-                for (int i4 = X2; i4 > indent; i4 -= length)
-                {
-                    g.DrawLine(point2, i4, Y2, i4 - length, Y2);
-                    i4 -= length;
-                }
-
-                for (int i1 = Y3; i1 > indent; i1 -= length)
-                {
-                    g.DrawLine(point3, X3, i1 - length, X3, i1);
-                    i1 -= length;
-                }
-                for (int i2 = X3; i2 > indent; i2 -= length)
-                {
-                    g.DrawLine(point3, i2 - length, Y3, i2, Y3);
-                    i2 -= length;
-                }
-                
-                for (int i3 = Y4; i3 > indent; i3 -= length)
-                {
-                    g.DrawLine(point4, X4, i3, X4, i3 - length);
-                    i3 -= length;
-                }
-                for (int i4 = X4; i4 > indent; i4 -= length)
-                {
-                    g.DrawLine(point4, i4, Y4, i4 - length, Y4);
-                    i4 -= length;
-                }
-            }
-
-            // Рисовать наименования точек
-            if (checkBox2.Checked == true)
-            {
-                g.DrawString(_line1.NameLine[0].ToString(), new Font("Arial", 12, FontStyle.Bold), moreColor, X1, Y1);
-                g.DrawString(_line2.NameLine[0].ToString(), new Font("Arial", 12, FontStyle.Bold), moreColor, X2, Y2);
-                g.DrawString(_line3.NameLine[0].ToString(), new Font("Arial", 12, FontStyle.Bold), moreColor, X3, Y3);
-                g.DrawString(_line4.NameLine[0].ToString(), new Font("Arial", 12, FontStyle.Bold), moreColor, X4, Y4);
-
-            }
+            PaintLine(ref snapshot, _line1, selectColor(), 2);
+            PaintLine(ref snapshot, _line2, selectColor(), 2);
+            PaintLine(ref snapshot, _line3, selectColor(), 2);
+            PaintLine(ref snapshot, _line4, selectColor(), 2);
         }
         /// <summary>
         /// Координатная ось
         /// </summary>
         private void Os_XY()
         {
-            pictureBox1.Image = null;
-            pictureBox1.Update();
             ok = false;
             const int size = 30 * sizeDiv; // Размер оси координат          
             
-
             tempDraw = (Bitmap)snapshot.Clone();
-            Graphics g = pictureBox1.CreateGraphics();
+            Graphics g = Graphics.FromImage(tempDraw);
             Pen pen = new Pen(Color.Black, 3);
             Pen line = new Pen(Brushes.LightGray, 1);
             Pen line1 = new Pen(Brushes.Black, 1);
@@ -376,6 +268,7 @@ namespace Lab1
             // Подписать точку начала
             g.DrawString("0", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 15, indent - 20);
 
+            snapshot = (Bitmap)tempDraw.Clone();
         }
         #endregion
 
@@ -439,8 +332,9 @@ namespace Lab1
                          new Point(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text)),
                          secondName_txt.Text,
                          new Point(Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text)));
-            PaintLine(_t, ForeColor, 2);
+            PaintLine(ref snapshot, _t, ForeColor, 2);
             InsertInList(_t);
+            pictureBox1.Image = snapshot;
         }
 
         private void CreateRectangle()
@@ -453,6 +347,7 @@ namespace Lab1
               name[1].ToString(),
               new Point(Convert.ToInt32(posX2r_textbox.Text), Convert.ToInt32(posY2r_textbox.Text)));
             InsertInList(_t1);
+            PaintLine(ref tempDraw, _t1, Color.Black, 2);
 
             Line _t2 = new Line(
              name[1].ToString(),
@@ -460,6 +355,7 @@ namespace Lab1
              name[2].ToString(),
              new Point(Convert.ToInt32(posX3r_textbox.Text), Convert.ToInt32(posY3r_textbox.Text)));
             InsertInList(_t2);
+            PaintLine(ref tempDraw, _t2, Color.Black, 2);
 
             Line _t3 = new Line(
              name[2].ToString(),
@@ -467,6 +363,7 @@ namespace Lab1
              name[3].ToString(),
              new Point(Convert.ToInt32(posX4r_textbox.Text), Convert.ToInt32(posY4r_textbox.Text)));
             InsertInList(_t3);
+            PaintLine(ref tempDraw, _t3, Color.Black, 2);
 
             Line _t4 = new Line(
              name[3].ToString(),
@@ -474,9 +371,11 @@ namespace Lab1
              name[0].ToString(),
              new Point(Convert.ToInt32(posX1r_textbox.Text), Convert.ToInt32(posY1r_textbox.Text)));
             InsertInList(_t4);
+            PaintLine(ref tempDraw, _t4, Color.Black, 2);
 
             PaintRectangle(_t1,_t2,_t3,_t4);
-
+            pictureBox1.Image = snapshot;
+            snapshot = (Bitmap)tempDraw.Clone();
         }
 
         /// <summary>
@@ -486,9 +385,9 @@ namespace Lab1
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            if (ok)
-                Os_XY();
-            CreateLine();
+            Os_XY();
+            //CreateLine();
+            pictureBox1.Image = snapshot;
         }
         /// <summary>
         /// Кнопка Отчистить все (в т.ч. datagridview)
@@ -499,8 +398,27 @@ namespace Lab1
         {
             pictureBox1.Image = null;
             pictureBox1.Update();
+            Graphics g = Graphics.FromImage(snapshot);
+            g.Clear(Color.White);
+            Os_XY();
             dataGridView1.Rows.Clear();
             LinesList = null;
+            Graphics g1 = Graphics.FromImage(snapshot);
+            g1.Clear(Color.White);
+
+            Graphics g2 = Graphics.FromImage(tempDraw);
+            g2.Clear(Color.White);
+
+            Graphics g3 = Graphics.FromImage(groupDraw);
+            g3.Clear(Color.White);
+
+            Graphics g4 = Graphics.FromImage(tempGroupDraw);
+            g4.Clear(Color.White);
+
+            g1.Dispose();
+            g2.Dispose();
+            g3.Dispose();
+            g4.Dispose();
             Os_XY();
         }
         /// <summary>
@@ -510,10 +428,11 @@ namespace Lab1
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
-            if (ok)
-                Os_XY();
+            Os_XY();
             RandomLine();
             CreateLine();
+            DrawLinesOnList(LinesList);
+            pictureBox1.Image = snapshot;
         }
 
         private void RandomLine()
@@ -559,12 +478,17 @@ namespace Lab1
         private void SelectLine(Line _line)
         {
             Line selectedLine = _line;
-            PaintLine(selectedLine, Color.Goldenrod, 4);
-            DrawSelectLine(selectedLine);
+            //snapshot.MakeTransparent(Color.White);
+            PaintLine(ref snapshot, selectedLine, Color.Red, 2);
+            snapshot.MakeTransparent(Color.White);
+            DrawSelectLine(selectedLine);          
         }
         private bool CheckSelected()
         {
-            return true;
+            if (LinesList == null)
+                return false;
+            else
+                return true;
         }
 
         private void DrawSelectLine(Line _line)
@@ -580,7 +504,7 @@ namespace Lab1
             Graphics g = groupPicturebox.CreateGraphics();
 
             foreColor = selectColor();
-            Pen pen = new Pen(Color.Goldenrod, 3);
+            Pen pen = new Pen(Color.Red, 2);
             Pen point = new Pen(Color.Black, 3);
 
             int startX = 10;
@@ -595,8 +519,8 @@ namespace Lab1
             g.DrawString(Convert.ToString(_line.NameLine[1]), new Font("Arial", 10, FontStyle.Bold), Brushes.Red, startX + 100, startY + 5);
 
 
-            g.DrawString(Convert.ToString(_line.Point1.posX + ";" + _line.Point1.posY), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, startX, startY - 20);
-            g.DrawString(Convert.ToString(_line.Point2.posX + ";" + _line.Point2.posY), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, startX + 100, startY - 20);
+            g.DrawString(Convert.ToString(_line.Point1.posX + ";" + _line.Point1.posY), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, startX - 10, startY - 20);
+            g.DrawString(Convert.ToString(_line.Point2.posX + ";" + _line.Point2.posY), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, startX + 100 - 10, startY - 20);
 
         }
 
@@ -630,6 +554,8 @@ namespace Lab1
         /// <param name="e"></param>
         private void button7_Click(object sender, EventArgs e)
         {
+            pictureBox1.Image = null;
+            pictureBox1.Update();
             Os_XY();
         }
         /// <summary>
@@ -639,10 +565,13 @@ namespace Lab1
         /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
-            //if (ok)
-                Os_XY();
+            pictureBox1.Image = null;
+            pictureBox1.Update();
+            Os_XY();
             FillListWithTable();
+            snapshot.MakeTransparent(Color.White);
             DrawLinesOnList(LinesList);
+            pictureBox1.Image = snapshot;
         }
         /// <summary>
         /// Удалить прямую из datagridview
@@ -651,28 +580,22 @@ namespace Lab1
         /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
-            int index = dataGridView1.CurrentRow.Index;
-            dataGridView1.Rows.RemoveAt(index);
-            dataGridView1.Refresh();
-            FillListWithTable();
-        }
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (LinesList != null)
+            try
             {
-                //if (ok)
-                    Os_XY();
+                pictureBox1.Image = null;
+                pictureBox1.Update();                
+                int index = dataGridView1.CurrentRow.Index;
+                dataGridView1.Rows.RemoveAt(index);
+                dataGridView1.Refresh();
+                FillListWithTable();                
                 DrawLinesOnList(LinesList);
+                pictureBox1.Image = snapshot;
             }
-        }
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (LinesList != null)
+            catch (InvalidOperationException)
             {
-                //if (ok)
-                    Os_XY();
-                DrawLinesOnList(LinesList);
+                return;
             }
+
         }
         private void button8_Click(object sender, EventArgs e)
         {
@@ -684,15 +607,6 @@ namespace Lab1
             groupBox1.Visible = true;
             groupBox4.Visible = false;
         }
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-            {
-            if (LinesList != null)
-            {
-                //if (ok)
-                    Os_XY();
-                DrawLinesOnList(LinesList);
-            }
-        }
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             lineWight = Convert.ToInt32(numericUpDown1.Value);
@@ -701,6 +615,7 @@ namespace Lab1
         {
             foreColor = selectColor();
         }
+
         /// <summary>
         /// Изобразить квадрат
         /// </summary>
@@ -708,9 +623,9 @@ namespace Lab1
         /// <param name="e"></param>
         private void button10_Click(object sender, EventArgs e)
         {
-            if (ok)
-                Os_XY();
+            Os_XY();
             CreateRectangle();
+            pictureBox1.Image = snapshot;
         }
         /// <summary>
         /// Изобразить случайный квадрат
@@ -719,32 +634,19 @@ namespace Lab1
         /// <param name="e"></param>
         private void button11_Click(object sender, EventArgs e)
         {
-            if (ok)
-                Os_XY();
+            Os_XY();
+            snapshot.MakeTransparent(Color.White);
             RandomRectangle();
             CreateRectangle();
+            pictureBox1.Image = snapshot;
         }
 
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+            // Выбранный элемент таблицы
             int index = dataGridView1.CurrentRow.Index;
-            
-            if ((CheckSelected()) && ((index > -1) && (index < LinesList.Count)))
+            if ((CheckSelected()) && (index < LinesList.Count))
             {
                 Os_XY();
                 DrawLinesOnList(LinesList);
@@ -756,6 +658,7 @@ namespace Lab1
                     obj[0].ToString()[1].ToString(),
                     new Point(Convert.ToInt32(obj[3]), Convert.ToInt32(obj[4]))
                 );
+                DrawLinesOnList(LinesList);
                 SelectLine(line);
             }
         }
@@ -767,10 +670,8 @@ namespace Lab1
             tempDraw = (Bitmap)snapshot.Clone();
             groupDraw = new Bitmap(groupPicturebox.ClientRectangle.Width, groupPicturebox.ClientRectangle.Height);
             tempGroupDraw = (Bitmap)groupDraw.Clone();
-
             foreColor = Color.LightSlateGray;
             lineWight = 2;
-            moreColor = Brushes.Red;
         }
     }
 }
