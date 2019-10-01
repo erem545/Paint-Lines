@@ -26,6 +26,9 @@ namespace Lab1
 
         List<List<object>> LinesList; // Список прямых (Список в списке)
         List<object> tempList; // Дополнительный список
+
+        List<List<object>> LinesListGroup;
+        List<object> tempListGroup;
         Bitmap snapshot, tempDraw; // Снимки
         //Bitmap linesScreen, tempLinesScreen; // Главный экран с линиями
         Bitmap groupDraw, tempGroupDraw; // группировка
@@ -35,33 +38,58 @@ namespace Lab1
 
 
         #region Lists
+
         /// <summary>
-        /// Вставить объект Line в список tempList
+        /// Создать список объектов из объекта линии
         /// </summary>
-        /// <param name="_line">Объект класса Line</param>
-        private void InsertInList(Line _line)
+        /// <param name="_line">Объект</param>
+        /// <returns></returns>
+        private List<object> CreateObjFromLine(Line _line)
         {
-            if (tempList == null)
-                tempList = new List<object>();
+            tempList = new List<object>();
             tempList.Add(_line.NameLine);
             tempList.Add(_line.Point1.posX);
             tempList.Add(_line.Point1.posY);
             tempList.Add(_line.Point2.posX);
             tempList.Add(_line.Point2.posY);
-            InsertInList(tempList);
-            tempList = null;
+            return tempList;
+        }
+
+        /// <summary>
+        /// Создает новый объект линию из списка объектов
+        /// </summary>
+        /// <param name="_list"></param>
+        /// <returns></returns>
+        private Line CreateLineFromObj(List<object> _list)
+        {
+            Line line = new Line(
+                _list[0].ToString()[0].ToString(),
+                new Point(Convert.ToInt32(_list[1]), Convert.ToInt32(_list[2])),
+                _list[0].ToString()[1].ToString(),
+                new Point(Convert.ToInt32(_list[3]), Convert.ToInt32(_list[4]))
+                );
+            return line;
+        }
+
+        /// <summary>
+        /// Вставить объект Line в список tempList
+        /// </summary>
+        /// <param name="_line">Объект класса Line</param>
+        private void InsertInList(Line _line, List<object> _list)
+        {
+            InsertInList(CreateObjFromLine(_line), ref LinesList);
         }
         /// <summary>
         /// Вставить список tempList в список LinesList
         /// </summary>
         /// <param name="_list">Список со списками List</param>
-        private void InsertInList(List<object> _list)
+        private void InsertInList(List<object> _list, ref List<List<object>> _listA)
         {
-            if (LinesList == null)
-                LinesList = new List<List<object>>();
-            LinesList.Add(_list);
+            if (_listA == null)
+                _listA = new List<List<object>>();
+            _listA.Add(_list);
             dataGridView1.Rows.Add();
-            FillTableWithList(LinesList);
+            FillTableWithList(_listA);
         }
         /// <summary>
         /// Заполнение datagridview данными из списка
@@ -114,18 +142,8 @@ namespace Lab1
             {
                 for (int i = 0; i < list.Count; ++i)
                 {
-                    line = list[i];
-                    Line _t = new Line
-                        (
-                            line[0].ToString()[0].ToString(),
-                            new Point(Convert.ToInt32(line[1]),
-                                      Convert.ToInt32(line[2])),
-
-                            line[0].ToString()[1].ToString(),
-                            new Point(Convert.ToInt32(line[3]),
-                                      Convert.ToInt32(line[4]))
-                       );
-                    PaintLine(ref snapshot, _t, selectColor(), lineWight);
+                    line = list[i];                   
+                    PaintLine(ref snapshot, CreateLineFromObj(line), selectColor(), lineWight);
                 }
             }
             catch (NullReferenceException)
@@ -330,7 +348,7 @@ namespace Lab1
                          secondName_txt.Text,
                          new Point(Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text)));
             PaintLine(ref snapshot, _t, ForeColor, lineWight);
-            InsertInList(_t);
+            InsertInList(_t, tempList);
             pictureBox1.Image = snapshot;
         }
 
@@ -343,7 +361,7 @@ namespace Lab1
               new Point(Convert.ToInt32(posX1r_textbox.Text), Convert.ToInt32(posY1r_textbox.Text)),
               name[1].ToString(),
               new Point(Convert.ToInt32(posX2r_textbox.Text), Convert.ToInt32(posY1r_textbox.Text)));
-            InsertInList(_t1);
+            InsertInList(_t1, tempList);
             PaintLine(ref tempDraw, _t1, Color.Black, lineWight);
 
             Line _t2 = new Line(
@@ -351,7 +369,7 @@ namespace Lab1
              new Point(Convert.ToInt32(posX2r_textbox.Text), Convert.ToInt32(posY1r_textbox.Text)),
              name[2].ToString(),
              new Point(Convert.ToInt32(posX2r_textbox.Text), Convert.ToInt32(posY2r_textbox.Text)));
-            InsertInList(_t2);
+            InsertInList(_t2, tempList);
             PaintLine(ref tempDraw, _t2, Color.Black, lineWight);
 
             Line _t3 = new Line(
@@ -359,7 +377,7 @@ namespace Lab1
              new Point(Convert.ToInt32(posX2r_textbox.Text), Convert.ToInt32(posY2r_textbox.Text)),
              name[3].ToString(),
              new Point(Convert.ToInt32(posX1r_textbox.Text), Convert.ToInt32(posY2r_textbox.Text)));
-            InsertInList(_t3);
+            InsertInList(_t3, tempList);
             PaintLine(ref tempDraw, _t3, Color.Black, lineWight);
 
             Line _t4 = new Line(
@@ -367,7 +385,7 @@ namespace Lab1
              new Point(Convert.ToInt32(posX1r_textbox.Text), Convert.ToInt32(posY2r_textbox.Text)),
              name[0].ToString(),
              new Point(Convert.ToInt32(posX1r_textbox.Text), Convert.ToInt32(posY1r_textbox.Text)));
-            InsertInList(_t4);
+            InsertInList(_t4, tempList);
             PaintLine(ref tempDraw, _t4, Color.Black, lineWight);
 
             PaintRectangle(_t1,_t2,_t3,_t4);
@@ -382,7 +400,6 @@ namespace Lab1
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            //Os_XY();
             pictureBox1.Image = snapshot;
         }
         /// <summary>
@@ -473,8 +490,11 @@ namespace Lab1
         {
             Line selectedLine = _line;
             DrawLinesOnList(LinesList);
-            PaintLine(ref snapshot, selectedLine, Color.Red, lineWight + 1);          
-            DrawSelectLine(selectedLine);          
+            PaintLine(ref snapshot, selectedLine, Color.Red, lineWight + 1);
+            if (LinesListGroup != null)
+                LinesListGroup.Add(CreateObjFromLine(_line));
+            //PaintSelectLine();
+            //LinesListGroup = new List<List<object>>();
         }
         private bool CheckSelected()
         {
@@ -484,51 +504,63 @@ namespace Lab1
                 return true;
         }
 
-        private void DrawSelectLine(Line _line)
+        private void PaintSelectLineList(List<List<object>> _list)
         {
             groupPicturebox.Image = null;
             groupPicturebox.Update();
-            int X1 = Convert.ToInt32(_line.Point1.posX);
-            int Y1 = Convert.ToInt32(_line.Point1.posY) * sizeDiv + indent;
-            int X2 = Convert.ToInt32(_line.Point2.posX) * sizeDiv + indent;
-            int Y2 = Convert.ToInt32(_line.Point2.posY) * sizeDiv + indent;
 
-            tempGroupDraw = (Bitmap)groupDraw.Clone();
-            Graphics g = groupPicturebox.CreateGraphics();
+            Graphics g = Graphics.FromImage(tempGroupDraw);
+            g.Clear(Color.White);
+            groupDraw = tempGroupDraw;
 
             foreColor = selectColor();
             Pen pen = new Pen(Color.Red, 2);
             Pen point = new Pen(Color.Black, 3);
+            int start = 20;
+            int size;
+            if (_list.Count != 0)
+                size = 600 / _list.Count;
+            else
+                size = 600;
 
-            int startX = 10;
             int startY = groupPicturebox.ClientRectangle.Height / 2;
 
-            g.DrawLine(pen, startX, startY, startX + 100, startY);
+            for (int i = 0; i < _list.Count; i++)
+            {
+                int startA = start + (size * i);
+                int endA = start + (size * (i + 1));
+                g.DrawLine(pen, startA, startY, endA, startY);
 
-            // Рисовать точки 
-            g.DrawRectangle(point, startX, startY - 2, 3, 3);
-            g.DrawRectangle(point, startX + 100, startY - 2, 3, 3);
+                // Рисовать точки 
+                g.DrawRectangle(point, startA, startY - 2, 3, 3);
+                g.DrawRectangle(point, endA, startY - 2, 3, 3);
 
-            // Подписать название
-            g.DrawString(Convert.ToString(_line.NameLine[0]), new Font("Arial", 10, FontStyle.Bold), Brushes.Red, startX, startY + 5);
-            g.DrawString(Convert.ToString(_line.NameLine[1]), new Font("Arial", 10, FontStyle.Bold), Brushes.Red, startX + 100, startY + 5);
+                // Подписать название
+                g.DrawString(Convert.ToString(_list[i][0].ToString()[0].ToString()), new Font("Arial", 8), Brushes.Black, startA - 10, startY + 5);
 
-            // Подписать координаты
-            g.DrawString(Convert.ToString(_line.Point1.posX + ";" + _line.Point1.posY), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, startX - 10, startY - 20);
-            g.DrawString(Convert.ToString(_line.Point2.posX + ";" + _line.Point2.posY), new Font("Arial", 10, FontStyle.Bold), Brushes.Black, startX + 100 - 10, startY - 20);
+                // Подписать координаты
+                g.DrawString(Convert.ToString(_list[i][1] + ";" + _list[i][2]), new Font("Arial", 8), Brushes.Black, startA - 10, startY - 20);
+
+                if (i == LinesListGroup.Count - 1)
+                {
+                    g.DrawString(Convert.ToString(_list[i][0].ToString()[1].ToString()), new Font("Arial", 8), Brushes.Black, endA - 10, startY + 5);
+                    g.DrawString(Convert.ToString(_list[i][3] + ";" + _list[i][4]), new Font("Arial", 8), Brushes.Black, endA - 10, startY - 20);
+                }
+            }
+            groupDraw = (Bitmap)tempGroupDraw.Clone();
+            groupPicturebox.Image = groupDraw;
         }
 
-        #endregion
-        /// <summary>
-        /// Изобразить линии по данным datagridview
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button6_Click(object sender, EventArgs e)
+            #endregion
+            /// <summary>
+            /// Изобразить линии по данным datagridview
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            private void button6_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
             pictureBox1.Update();
-            //Os_XY();
             FillListWithTable();
             snapshot.MakeTransparent(Color.White);
             DrawLinesOnList(LinesList);
@@ -587,7 +619,6 @@ namespace Lab1
         /// <param name="e"></param>
         private void button10_Click(object sender, EventArgs e)
         {
-            //Os_XY();
             CreateRectangle();
             pictureBox1.Image = snapshot;
         }
@@ -598,7 +629,6 @@ namespace Lab1
         /// <param name="e"></param>
         private void button11_Click(object sender, EventArgs e)
         {
-            //Os_XY();
             snapshot.MakeTransparent(Color.White);
             RandomRectangle();
             CreateRectangle();
@@ -626,18 +656,15 @@ namespace Lab1
         {
             // Выбранный элемент таблицы
             int index = dataGridView1.CurrentRow.Index;
-            if ((CheckSelected()) && (index < LinesList.Count))
+            if (index < LinesList.Count)
             {                
-                List<object> obj = LinesList.ElementAt(index);
-                Line line = new Line
-                    (
-                    obj[0].ToString()[0].ToString(),
-                    new Point(Convert.ToInt32(obj[1]), Convert.ToInt32(obj[2])),
-                    obj[0].ToString()[1].ToString(),
-                    new Point(Convert.ToInt32(obj[3]), Convert.ToInt32(obj[4]))
-                );
-                SelectLine(line);
+                List<object> obj = LinesList.ElementAt(index);              
+                SelectLine(CreateLineFromObj(obj));
+                LinesListGroup = new List<List<object>>();
+                LinesListGroup.Add(obj);
+                PaintSelectLineList(LinesListGroup);
             }
+
         }
 
         public Form1()
