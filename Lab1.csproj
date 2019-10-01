@@ -89,6 +89,8 @@
     <None Include="Properties\line.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\plus.png" />
+    <None Include="Properties\minus.png" />
     <Content Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

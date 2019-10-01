@@ -459,10 +459,10 @@ namespace Lab1
             char char4 = (char)rnd2.Next(0x0041, 0x005A);
 
             textBox1.Text = (char1 + char2 + char3 + char4).ToString();
-            posX1r_textbox.Text = new Random(DateTime.Now.Millisecond + 15 * 999).Next(5, 10).ToString();
-            posY1r_textbox.Text = new Random(DateTime.Now.Millisecond + 25 * 1999).Next(5, 10).ToString();
-            posX2r_textbox.Text = new Random(DateTime.Now.Millisecond + 35 * 2999).Next(5, 25).ToString();
-            posY2r_textbox.Text = new Random(DateTime.Now.Millisecond + 45 * 3999).Next(5, 25).ToString();
+            posX1r_textbox.Text = new Random(DateTime.Now.Millisecond + 15 * 999).Next(5, 15).ToString();
+            posY1r_textbox.Text = new Random(DateTime.Now.Millisecond + 25 * 1999).Next(5, 15).ToString();
+            posX2r_textbox.Text = new Random(DateTime.Now.Millisecond + 35 * 2999).Next(15, 25).ToString();
+            posY2r_textbox.Text = new Random(DateTime.Now.Millisecond + 45 * 3999).Next(15, 25).ToString();
         }
 
         #endregion

@@ -46,7 +46,6 @@
             this.column_Y1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_X2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_Y2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button4 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -58,7 +57,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.PictureFromTable_btn = new System.Windows.Forms.Button();
             this.DeleteFromTable_btn = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.SelectRectangle_btn = new System.Windows.Forms.Button();
             this.SelectLine_btn = new System.Windows.Forms.Button();
@@ -110,7 +108,7 @@
             this.groupBox1.Controls.Add(this.secondName_txt);
             this.groupBox1.Location = new System.Drawing.Point(684, 347);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(298, 112);
+            this.groupBox1.Size = new System.Drawing.Size(298, 176);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Рисовать прямую";
@@ -141,7 +139,7 @@
             // 
             // PictureRandomLine_btn
             // 
-            this.PictureRandomLine_btn.Location = new System.Drawing.Point(215, 83);
+            this.PictureRandomLine_btn.Location = new System.Drawing.Point(90, 147);
             this.PictureRandomLine_btn.Name = "PictureRandomLine_btn";
             this.PictureRandomLine_btn.Size = new System.Drawing.Size(77, 23);
             this.PictureRandomLine_btn.TabIndex = 34;
@@ -151,7 +149,7 @@
             // 
             // PictureLine_btn
             // 
-            this.PictureLine_btn.Location = new System.Drawing.Point(215, 57);
+            this.PictureLine_btn.Location = new System.Drawing.Point(6, 147);
             this.PictureLine_btn.Name = "PictureLine_btn";
             this.PictureLine_btn.Size = new System.Drawing.Size(78, 23);
             this.PictureLine_btn.TabIndex = 27;
@@ -263,16 +261,6 @@
             this.column_Y2.HeaderText = "Y2";
             this.column_Y2.Name = "column_Y2";
             this.column_Y2.Width = 40;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(683, 678);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(85, 23);
-            this.button4.TabIndex = 53;
-            this.button4.Text = "Справка";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // groupBox2
             // 
@@ -414,16 +402,6 @@
             this.DeleteFromTable_btn.UseVisualStyleBackColor = true;
             this.DeleteFromTable_btn.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(774, 678);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(85, 23);
-            this.button7.TabIndex = 56;
-            this.button7.Text = "Отчистить";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
@@ -436,7 +414,7 @@
             // SelectRectangle_btn
             // 
             this.SelectRectangle_btn.Image = global::Lab1.Properties.Resources.rectangle1;
-            this.SelectRectangle_btn.Location = new System.Drawing.Point(684, 465);
+            this.SelectRectangle_btn.Location = new System.Drawing.Point(688, 529);
             this.SelectRectangle_btn.Name = "SelectRectangle_btn";
             this.SelectRectangle_btn.Size = new System.Drawing.Size(45, 45);
             this.SelectRectangle_btn.TabIndex = 51;
@@ -446,7 +424,7 @@
             // SelectLine_btn
             // 
             this.SelectLine_btn.Image = global::Lab1.Properties.Resources.line;
-            this.SelectLine_btn.Location = new System.Drawing.Point(733, 465);
+            this.SelectLine_btn.Location = new System.Drawing.Point(737, 529);
             this.SelectLine_btn.Name = "SelectLine_btn";
             this.SelectLine_btn.Size = new System.Drawing.Size(45, 45);
             this.SelectLine_btn.TabIndex = 52;
@@ -455,8 +433,6 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.groupBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.groupBox4.Controls.Add(this.PictureRandomRectangle_btn);
             this.groupBox4.Controls.Add(this.PictureRectangle_btn);
             this.groupBox4.Controls.Add(this.label9);
@@ -469,14 +445,14 @@
             this.groupBox4.Controls.Add(this.posX1r_textbox);
             this.groupBox4.Location = new System.Drawing.Point(684, 347);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(298, 112);
+            this.groupBox4.Size = new System.Drawing.Size(298, 174);
             this.groupBox4.TabIndex = 57;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Рисовать квадрат";
             // 
             // PictureRandomRectangle_btn
             // 
-            this.PictureRandomRectangle_btn.Location = new System.Drawing.Point(214, 83);
+            this.PictureRandomRectangle_btn.Location = new System.Drawing.Point(165, 73);
             this.PictureRandomRectangle_btn.Name = "PictureRandomRectangle_btn";
             this.PictureRandomRectangle_btn.Size = new System.Drawing.Size(78, 23);
             this.PictureRandomRectangle_btn.TabIndex = 62;
@@ -486,7 +462,7 @@
             // 
             // PictureRectangle_btn
             // 
-            this.PictureRectangle_btn.Location = new System.Drawing.Point(214, 57);
+            this.PictureRectangle_btn.Location = new System.Drawing.Point(165, 45);
             this.PictureRectangle_btn.Name = "PictureRectangle_btn";
             this.PictureRectangle_btn.Size = new System.Drawing.Size(78, 23);
             this.PictureRectangle_btn.TabIndex = 61;
@@ -589,7 +565,7 @@
             this.checkBox4.Location = new System.Drawing.Point(123, 69);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(76, 17);
-            this.checkBox4.TabIndex = 59;
+            this.checkBox4.TabIndex = 65;
             this.checkBox4.Text = "Разметка";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
@@ -602,10 +578,8 @@
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.SelectLine_btn);
             this.Controls.Add(this.SelectRectangle_btn);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
@@ -653,7 +627,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
@@ -663,7 +636,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button PictureFromTable_btn;
         private System.Windows.Forms.Button DeleteFromTable_btn;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_X1;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_Y1;
