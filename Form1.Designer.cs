@@ -74,6 +74,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupPicturebox = new System.Windows.Forms.PictureBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.posY2_textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posY1_textbox)).BeginInit();
@@ -569,12 +570,23 @@
             this.checkBox4.Text = "Разметка";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(907, 712);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 59;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(994, 747);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.SelectLine_btn);
             this.Controls.Add(this.SelectRectangle_btn);
@@ -659,6 +671,7 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.PictureBox groupPicturebox;
         private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -125,7 +125,7 @@ namespace Lab1
                             new Point(Convert.ToInt32(line[3]),
                                       Convert.ToInt32(line[4]))
                        );
-                    PaintLine(ref snapshot, _t, selectColor(), 2);
+                    PaintLine(ref snapshot, _t, selectColor(), lineWight);
                 }
             }
             catch (NullReferenceException)
@@ -155,7 +155,7 @@ namespace Lab1
 
             // Инструменты
             Pen pen = new Pen(color, _lineWeight);
-            Pen point = new Pen(color, 3);
+            Pen point = new Pen(color, _lineWeight + 1);
             Pen linesXY = new Pen(color, 1);
 
             // Рисовать точки 
@@ -214,10 +214,10 @@ namespace Lab1
         }
         private void PaintRectangle(Line _line1, Line _line2, Line _line3, Line _line4)
         {
-            PaintLine(ref snapshot, _line1, selectColor(), 2);
-            PaintLine(ref snapshot, _line2, selectColor(), 2);
-            PaintLine(ref snapshot, _line3, selectColor(), 2);
-            PaintLine(ref snapshot, _line4, selectColor(), 2);
+            PaintLine(ref snapshot, _line1, selectColor(), lineWight);
+            PaintLine(ref snapshot, _line2, selectColor(), lineWight);
+            PaintLine(ref snapshot, _line3, selectColor(), lineWight);
+            PaintLine(ref snapshot, _line4, selectColor(), lineWight);
         }
         /// <summary>
         /// Координатная ось
@@ -329,14 +329,14 @@ namespace Lab1
                          new Point(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text)),
                          secondName_txt.Text,
                          new Point(Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text)));
-            PaintLine(ref snapshot, _t, ForeColor, 2);
+            PaintLine(ref snapshot, _t, ForeColor, lineWight);
             InsertInList(_t);
             pictureBox1.Image = snapshot;
         }
 
         private void CreateRectangle()
         {
-            var name = "ABCD";
+            string name = "ABCD";
 
             Line _t1 = new Line(
               name[0].ToString(),
@@ -344,7 +344,7 @@ namespace Lab1
               name[1].ToString(),
               new Point(Convert.ToInt32(posX2r_textbox.Text), Convert.ToInt32(posY1r_textbox.Text)));
             InsertInList(_t1);
-            PaintLine(ref tempDraw, _t1, Color.Black, 2);
+            PaintLine(ref tempDraw, _t1, Color.Black, lineWight);
 
             Line _t2 = new Line(
              name[1].ToString(),
@@ -352,7 +352,7 @@ namespace Lab1
              name[2].ToString(),
              new Point(Convert.ToInt32(posX2r_textbox.Text), Convert.ToInt32(posY2r_textbox.Text)));
             InsertInList(_t2);
-            PaintLine(ref tempDraw, _t2, Color.Black, 2);
+            PaintLine(ref tempDraw, _t2, Color.Black, lineWight);
 
             Line _t3 = new Line(
              name[2].ToString(),
@@ -360,7 +360,7 @@ namespace Lab1
              name[3].ToString(),
              new Point(Convert.ToInt32(posX1r_textbox.Text), Convert.ToInt32(posY2r_textbox.Text)));
             InsertInList(_t3);
-            PaintLine(ref tempDraw, _t3, Color.Black, 2);
+            PaintLine(ref tempDraw, _t3, Color.Black, lineWight);
 
             Line _t4 = new Line(
              name[3].ToString(),
@@ -368,7 +368,7 @@ namespace Lab1
              name[0].ToString(),
              new Point(Convert.ToInt32(posX1r_textbox.Text), Convert.ToInt32(posY1r_textbox.Text)));
             InsertInList(_t4);
-            PaintLine(ref tempDraw, _t4, Color.Black, 2);
+            PaintLine(ref tempDraw, _t4, Color.Black, lineWight);
 
             PaintRectangle(_t1,_t2,_t3,_t4);
             pictureBox1.Image = snapshot;
@@ -473,7 +473,7 @@ namespace Lab1
         {
             Line selectedLine = _line;
             DrawLinesOnList(LinesList);
-            PaintLine(ref snapshot, selectedLine, Color.Red, 2);          
+            PaintLine(ref snapshot, selectedLine, Color.Red, lineWight + 1);          
             DrawSelectLine(selectedLine);          
         }
         private bool CheckSelected()
@@ -519,37 +519,6 @@ namespace Lab1
         }
 
         #endregion
-
-        /// <summary>
-        /// Кнопка Справка
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button4_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(@"УПРАВЛЕНИЕ ПРЯМОЙ " + Environment.NewLine + 
-                              "Случайные - создает случайную прямую" + Environment.NewLine + 
-                              "Изобразить прямую - создает прямую по заданным параметрам" + Environment.NewLine +
-                              "РАБОТА С ДАННЫМИ" + Environment.NewLine +
-                              "Изобразить - изобразить все прямые из списка" + Environment.NewLine +
-                              "Удалить - удалить прямую из списка" + Environment.NewLine +
-                              "Отчистить все - отчищает все данные" + Environment.NewLine +
-                              "НАСТРОЙКА" + Environment.NewLine +
-                              "Показать линии" + Environment.NewLine +
-                              "Рисовать линии к осям - отображает линии к осям OX OY" + Environment.NewLine +
-                              " - - - - - - - - - - - - - - - - - - - - - - - - - -" + Environment.NewLine +
-                              "Используйте кнопку изобразить для построения фигур из прямых."
-                              , "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }     
-        /// <summary>
-        /// Кнопка Отчистить (Поле)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button7_Click(object sender, EventArgs e)
-        {
-            Os_XY();
-        }
         /// <summary>
         /// Изобразить линии по данным datagridview
         /// </summary>
@@ -636,7 +605,23 @@ namespace Lab1
             pictureBox1.Image = snapshot;
         }
 
-        
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show(@"УПРАВЛЕНИЕ ПРЯМОЙ " + Environment.NewLine +
+                  "Случайные - создает случайную прямую" + Environment.NewLine +
+                  "Изобразить прямую - создает прямую по заданным параметрам" + Environment.NewLine +
+                  "РАБОТА С ДАННЫМИ" + Environment.NewLine +
+                  "Изобразить - изобразить все прямые из списка" + Environment.NewLine +
+                  "Удалить - удалить прямую из списка" + Environment.NewLine +
+                  "Отчистить все - отчищает все данные" + Environment.NewLine +
+                  "НАСТРОЙКА" + Environment.NewLine +
+                  "Показать линии" + Environment.NewLine +
+                  "Рисовать линии к осям - отображает линии к осям OX OY" + Environment.NewLine +
+                  " - - - - - - - - - - - - - - - - - - - - - - - - - -" + Environment.NewLine +
+                  "Используйте кнопку изобразить для построения фигур из прямых."
+                  , "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             // Выбранный элемент таблицы
@@ -663,7 +648,7 @@ namespace Lab1
             groupDraw = new Bitmap(groupPicturebox.ClientRectangle.Width, groupPicturebox.ClientRectangle.Height);
             tempGroupDraw = (Bitmap)groupDraw.Clone();
             foreColor = Color.LightSlateGray;
-            lineWight = 2;
+            lineWight = 4;
         }
     }
 }
