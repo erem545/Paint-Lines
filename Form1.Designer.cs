@@ -63,12 +63,6 @@
             this.SelectRectangle_btn = new System.Windows.Forms.Button();
             this.SelectLine_btn = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.posY4r_textbox = new System.Windows.Forms.NumericUpDown();
-            this.posY3r_textbox = new System.Windows.Forms.NumericUpDown();
-            this.posX4r_textbox = new System.Windows.Forms.NumericUpDown();
-            this.posX3r_textbox = new System.Windows.Forms.NumericUpDown();
             this.PictureRandomRectangle_btn = new System.Windows.Forms.Button();
             this.PictureRectangle_btn = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -79,10 +73,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.posX2r_textbox = new System.Windows.Forms.NumericUpDown();
             this.posX1r_textbox = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupPicturebox = new System.Windows.Forms.PictureBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.posY2_textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posY1_textbox)).BeginInit();
@@ -95,10 +88,6 @@
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.posY4r_textbox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.posY3r_textbox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.posX4r_textbox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.posX3r_textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posY2r_textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posY1r_textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posX2r_textbox)).BeginInit();
@@ -121,7 +110,7 @@
             this.groupBox1.Controls.Add(this.secondName_txt);
             this.groupBox1.Location = new System.Drawing.Point(684, 347);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(298, 176);
+            this.groupBox1.Size = new System.Drawing.Size(298, 112);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Рисовать прямую";
@@ -152,7 +141,7 @@
             // 
             // PictureRandomLine_btn
             // 
-            this.PictureRandomLine_btn.Location = new System.Drawing.Point(90, 147);
+            this.PictureRandomLine_btn.Location = new System.Drawing.Point(215, 83);
             this.PictureRandomLine_btn.Name = "PictureRandomLine_btn";
             this.PictureRandomLine_btn.Size = new System.Drawing.Size(77, 23);
             this.PictureRandomLine_btn.TabIndex = 34;
@@ -162,7 +151,7 @@
             // 
             // PictureLine_btn
             // 
-            this.PictureLine_btn.Location = new System.Drawing.Point(6, 147);
+            this.PictureLine_btn.Location = new System.Drawing.Point(215, 57);
             this.PictureLine_btn.Name = "PictureLine_btn";
             this.PictureLine_btn.Size = new System.Drawing.Size(78, 23);
             this.PictureLine_btn.TabIndex = 27;
@@ -287,6 +276,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.checkBox4);
             this.groupBox2.Controls.Add(this.checkBox3);
             this.groupBox2.Controls.Add(this.checkBox2);
             this.groupBox2.Controls.Add(this.label6);
@@ -446,7 +436,7 @@
             // SelectRectangle_btn
             // 
             this.SelectRectangle_btn.Image = global::Lab1.Properties.Resources.rectangle1;
-            this.SelectRectangle_btn.Location = new System.Drawing.Point(688, 529);
+            this.SelectRectangle_btn.Location = new System.Drawing.Point(684, 465);
             this.SelectRectangle_btn.Name = "SelectRectangle_btn";
             this.SelectRectangle_btn.Size = new System.Drawing.Size(45, 45);
             this.SelectRectangle_btn.TabIndex = 51;
@@ -456,7 +446,7 @@
             // SelectLine_btn
             // 
             this.SelectLine_btn.Image = global::Lab1.Properties.Resources.line;
-            this.SelectLine_btn.Location = new System.Drawing.Point(737, 529);
+            this.SelectLine_btn.Location = new System.Drawing.Point(733, 465);
             this.SelectLine_btn.Name = "SelectLine_btn";
             this.SelectLine_btn.Size = new System.Drawing.Size(45, 45);
             this.SelectLine_btn.TabIndex = 52;
@@ -465,12 +455,8 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.posY4r_textbox);
-            this.groupBox4.Controls.Add(this.posY3r_textbox);
-            this.groupBox4.Controls.Add(this.posX4r_textbox);
-            this.groupBox4.Controls.Add(this.posX3r_textbox);
+            this.groupBox4.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.groupBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.groupBox4.Controls.Add(this.PictureRandomRectangle_btn);
             this.groupBox4.Controls.Add(this.PictureRectangle_btn);
             this.groupBox4.Controls.Add(this.label9);
@@ -481,68 +467,16 @@
             this.groupBox4.Controls.Add(this.textBox1);
             this.groupBox4.Controls.Add(this.posX2r_textbox);
             this.groupBox4.Controls.Add(this.posX1r_textbox);
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Location = new System.Drawing.Point(684, 347);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(298, 174);
+            this.groupBox4.Size = new System.Drawing.Size(298, 112);
             this.groupBox4.TabIndex = 57;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Рисовать квадрат";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 127);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 68;
-            this.label2.Text = "Точка 2:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 101);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
-            this.label3.TabIndex = 67;
-            this.label3.Text = "Точка 1:";
-            // 
-            // posY4r_textbox
-            // 
-            this.posY4r_textbox.Location = new System.Drawing.Point(113, 124);
-            this.posY4r_textbox.Name = "posY4r_textbox";
-            this.posY4r_textbox.Size = new System.Drawing.Size(46, 20);
-            this.posY4r_textbox.TabIndex = 66;
-            this.posY4r_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // posY3r_textbox
-            // 
-            this.posY3r_textbox.Location = new System.Drawing.Point(113, 99);
-            this.posY3r_textbox.Name = "posY3r_textbox";
-            this.posY3r_textbox.Size = new System.Drawing.Size(46, 20);
-            this.posY3r_textbox.TabIndex = 65;
-            this.posY3r_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // posX4r_textbox
-            // 
-            this.posX4r_textbox.Location = new System.Drawing.Point(61, 125);
-            this.posX4r_textbox.Name = "posX4r_textbox";
-            this.posX4r_textbox.Size = new System.Drawing.Size(46, 20);
-            this.posX4r_textbox.TabIndex = 64;
-            this.posX4r_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // posX3r_textbox
-            // 
-            this.posX3r_textbox.Location = new System.Drawing.Point(61, 99);
-            this.posX3r_textbox.Name = "posX3r_textbox";
-            this.posX3r_textbox.Size = new System.Drawing.Size(46, 20);
-            this.posX3r_textbox.TabIndex = 63;
-            this.posX3r_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // PictureRandomRectangle_btn
             // 
-            this.PictureRandomRectangle_btn.Location = new System.Drawing.Point(165, 73);
+            this.PictureRandomRectangle_btn.Location = new System.Drawing.Point(214, 83);
             this.PictureRandomRectangle_btn.Name = "PictureRandomRectangle_btn";
             this.PictureRandomRectangle_btn.Size = new System.Drawing.Size(78, 23);
             this.PictureRandomRectangle_btn.TabIndex = 62;
@@ -552,7 +486,7 @@
             // 
             // PictureRectangle_btn
             // 
-            this.PictureRectangle_btn.Location = new System.Drawing.Point(165, 45);
+            this.PictureRectangle_btn.Location = new System.Drawing.Point(214, 57);
             this.PictureRectangle_btn.Name = "PictureRectangle_btn";
             this.PictureRectangle_btn.Size = new System.Drawing.Size(78, 23);
             this.PictureRectangle_btn.TabIndex = 61;
@@ -628,24 +562,6 @@
             this.posX1r_textbox.TabIndex = 51;
             this.posX1r_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(70, 147);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(14, 13);
-            this.label7.TabIndex = 57;
-            this.label7.Text = "X";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(122, 147);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(14, 13);
-            this.label4.TabIndex = 58;
-            this.label4.Text = "Y";
-            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.groupPicturebox);
@@ -664,6 +580,18 @@
             this.groupPicturebox.Size = new System.Drawing.Size(648, 47);
             this.groupPicturebox.TabIndex = 0;
             this.groupPicturebox.TabStop = false;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Checked = true;
+            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox4.Location = new System.Drawing.Point(123, 69);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(76, 17);
+            this.checkBox4.TabIndex = 59;
+            this.checkBox4.Text = "Разметка";
+            this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -699,10 +627,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.posY4r_textbox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.posY3r_textbox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.posX4r_textbox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.posX3r_textbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.posY2r_textbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.posY1r_textbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.posX2r_textbox)).EndInit();
@@ -756,20 +680,13 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.NumericUpDown posX2r_textbox;
         private System.Windows.Forms.NumericUpDown posX1r_textbox;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button PictureRandomRectangle_btn;
         private System.Windows.Forms.Button PictureRectangle_btn;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown posY4r_textbox;
-        private System.Windows.Forms.NumericUpDown posY3r_textbox;
-        private System.Windows.Forms.NumericUpDown posX4r_textbox;
-        private System.Windows.Forms.NumericUpDown posX3r_textbox;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.PictureBox groupPicturebox;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }
 
