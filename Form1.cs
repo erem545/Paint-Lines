@@ -354,7 +354,7 @@ namespace Lab1
 
         private void CreateRectangle()
         {
-            string name = "ABCD";
+            string name = rectanglName_textbox.Text.ToString();
 
             Line _t1 = new Line(
               name[0].ToString(),
