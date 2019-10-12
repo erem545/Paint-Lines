@@ -1,0 +1,50 @@
+﻿  int X1 = Convert.ToInt32(_line1.Point1.posX) * sizeDiv + indent;
+            int Y1 = Convert.ToInt32(_line1.Point1.posY) * sizeDiv + indent;
+            int X2 = Convert.ToInt32(_line2.Point1.posX) * sizeDiv + indent;
+            int Y2 = Convert.ToInt32(_line2.Point1.posY) * sizeDiv + indent;
+            int X3 = Convert.ToInt32(_line3.Point1.posX) * sizeDiv + indent;
+            int Y3 = Convert.ToInt32(_line3.Point1.posY) * sizeDiv + indent;
+            int X4 = Convert.ToInt32(_line4.Point1.posX) * sizeDiv + indent;
+            int Y4 = Convert.ToInt32(_line4.Point1.posY) * sizeDiv + indent;
+
+            tempDraw = (Bitmap)snapshot.Clone();
+            Graphics g = pictureBox1.CreateGraphics();
+
+            // Цвета
+            foreColor = selectColor();
+
+            // Инструменты
+            Pen pen = new Pen(foreColor, lineWight);
+
+            Pen point1 = new Pen(moreColor, 1);
+            Pen point2 = new Pen(moreColor, 1);
+            Pen point3 = new Pen(moreColor, 1);
+            Pen point4 = new Pen(moreColor, 1);
+            Pen point11 = new Pen(moreColor, 2);
+            Pen point12 = new Pen(moreColor, 2);
+            Pen point13 = new Pen(moreColor, 2);
+            Pen point14 = new Pen(moreColor, 2);
+
+            // Рисовать точки 
+            g.DrawRectangle(point11, X1, Y1, 2, 2);
+            g.DrawRectangle(point12, X2, Y2, 2, 2);
+            g.DrawRectangle(point13, X3, Y3, 2, 2);
+            g.DrawRectangle(point14, X4, Y4, 2, 2);
+
+            g.DrawString(Convert.ToInt32(_line1.Point1.posX).ToString(), new Font("Arial", 10), Brushes.Black, X1 - 5, indent - 20);
+            g.DrawString(Convert.ToInt32(_line1.Point1.posY).ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y1 - 5);
+            g.DrawString(Convert.ToInt32(_line2.Point1.posX).ToString(), new Font("Arial", 10), Brushes.Black, X2 - 5, indent - 20);
+            g.DrawString(Convert.ToInt32(_line2.Point1.posY).ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y2 - 5);
+            g.DrawString(Convert.ToInt32(_line3.Point1.posX).ToString(), new Font("Arial", 10), Brushes.Black, X3 - 5, indent - 20);
+            g.DrawString(Convert.ToInt32(_line3.Point1.posY).ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y3 - 5);
+            g.DrawString(Convert.ToInt32(_line4.Point1.posX).ToString(), new Font("Arial", 10), Brushes.Black, X4 - 5, indent - 20);
+            g.DrawString(Convert.ToInt32(_line4.Point1.posY).ToString(), new Font("Arial", 10), Brushes.Black, indent - 20, Y4 - 5);
+
+            // Рисовать основных линиий
+            if (checkBox3.Checked == true)
+            {
+                g.DrawLine(pen, X1, Y1, X2, Y2);
+                g.DrawLine(pen, X2, Y2, X3, Y3);
+                g.DrawLine(pen, X3, Y3, X4, Y4);
+                g.DrawLine(pen, X4, Y4, X1, Y1);
+            }
