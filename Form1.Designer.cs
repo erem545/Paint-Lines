@@ -41,12 +41,8 @@
             this.secondName_txt = new System.Windows.Forms.TextBox();
             this.ClearAll_btn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.column_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_X1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Y1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_X2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Y2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -68,13 +64,18 @@
             this.posY2r_textbox = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.posY1r_textbox = new System.Windows.Forms.NumericUpDown();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.rectanglName_textbox = new System.Windows.Forms.TextBox();
             this.posX2r_textbox = new System.Windows.Forms.NumericUpDown();
             this.posX1r_textbox = new System.Windows.Forms.NumericUpDown();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupPicturebox = new System.Windows.Forms.PictureBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.column_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_X1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Y1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_X2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Y2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Group = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.posY2_textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posY1_textbox)).BeginInit();
@@ -116,7 +117,7 @@
             // 
             // posY2_textbox
             // 
-            this.posY2_textbox.Location = new System.Drawing.Point(93, 67);
+            this.posY2_textbox.Location = new System.Drawing.Point(113, 76);
             this.posY2_textbox.Name = "posY2_textbox";
             this.posY2_textbox.Size = new System.Drawing.Size(46, 20);
             this.posY2_textbox.TabIndex = 38;
@@ -124,7 +125,7 @@
             // 
             // posY1_textbox
             // 
-            this.posY1_textbox.Location = new System.Drawing.Point(93, 40);
+            this.posY1_textbox.Location = new System.Drawing.Point(113, 50);
             this.posY1_textbox.Name = "posY1_textbox";
             this.posY1_textbox.Size = new System.Drawing.Size(46, 20);
             this.posY1_textbox.TabIndex = 37;
@@ -132,7 +133,7 @@
             // 
             // posX2_textbox
             // 
-            this.posX2_textbox.Location = new System.Drawing.Point(41, 66);
+            this.posX2_textbox.Location = new System.Drawing.Point(61, 76);
             this.posX2_textbox.Name = "posX2_textbox";
             this.posX2_textbox.Size = new System.Drawing.Size(46, 20);
             this.posX2_textbox.TabIndex = 36;
@@ -140,7 +141,7 @@
             // 
             // PictureRandomLine_btn
             // 
-            this.PictureRandomLine_btn.Location = new System.Drawing.Point(90, 147);
+            this.PictureRandomLine_btn.Location = new System.Drawing.Point(165, 73);
             this.PictureRandomLine_btn.Name = "PictureRandomLine_btn";
             this.PictureRandomLine_btn.Size = new System.Drawing.Size(77, 23);
             this.PictureRandomLine_btn.TabIndex = 34;
@@ -150,7 +151,7 @@
             // 
             // PictureLine_btn
             // 
-            this.PictureLine_btn.Location = new System.Drawing.Point(6, 147);
+            this.PictureLine_btn.Location = new System.Drawing.Point(165, 47);
             this.PictureLine_btn.Name = "PictureLine_btn";
             this.PictureLine_btn.Size = new System.Drawing.Size(78, 23);
             this.PictureLine_btn.TabIndex = 27;
@@ -160,7 +161,7 @@
             // 
             // posX1_textbox
             // 
-            this.posX1_textbox.Location = new System.Drawing.Point(41, 40);
+            this.posX1_textbox.Location = new System.Drawing.Point(61, 50);
             this.posX1_textbox.Name = "posX1_textbox";
             this.posX1_textbox.Size = new System.Drawing.Size(46, 20);
             this.posX1_textbox.TabIndex = 35;
@@ -169,7 +170,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(103, 21);
+            this.label20.Location = new System.Drawing.Point(123, 31);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(14, 13);
             this.label20.TabIndex = 50;
@@ -178,7 +179,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(50, 21);
+            this.label21.Location = new System.Drawing.Point(70, 31);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(14, 13);
             this.label21.TabIndex = 49;
@@ -186,7 +187,7 @@
             // 
             // firstName_txt
             // 
-            this.firstName_txt.Location = new System.Drawing.Point(4, 40);
+            this.firstName_txt.Location = new System.Drawing.Point(24, 50);
             this.firstName_txt.Name = "firstName_txt";
             this.firstName_txt.Size = new System.Drawing.Size(31, 20);
             this.firstName_txt.TabIndex = 29;
@@ -195,7 +196,7 @@
             // 
             // secondName_txt
             // 
-            this.secondName_txt.Location = new System.Drawing.Point(4, 66);
+            this.secondName_txt.Location = new System.Drawing.Point(24, 76);
             this.secondName_txt.Name = "secondName_txt";
             this.secondName_txt.Size = new System.Drawing.Size(31, 20);
             this.secondName_txt.TabIndex = 30;
@@ -220,7 +221,8 @@
             this.column_X1,
             this.column_Y1,
             this.column_X2,
-            this.column_Y2});
+            this.column_Y2,
+            this.Group});
             this.dataGridView1.Location = new System.Drawing.Point(6, 19);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -229,39 +231,6 @@
             this.dataGridView1.TabIndex = 52;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // column_Name
-            // 
-            this.column_Name.HeaderText = "Прямая";
-            this.column_Name.Name = "column_Name";
-            // 
-            // column_X1
-            // 
-            this.column_X1.FillWeight = 40F;
-            this.column_X1.HeaderText = "X1";
-            this.column_X1.Name = "column_X1";
-            this.column_X1.Width = 40;
-            // 
-            // column_Y1
-            // 
-            this.column_Y1.FillWeight = 40F;
-            this.column_Y1.HeaderText = "Y1";
-            this.column_Y1.Name = "column_Y1";
-            this.column_Y1.Width = 40;
-            // 
-            // column_X2
-            // 
-            this.column_X2.FillWeight = 40F;
-            this.column_X2.HeaderText = "X2";
-            this.column_X2.Name = "column_X2";
-            this.column_X2.Width = 40;
-            // 
-            // column_Y2
-            // 
-            this.column_Y2.FillWeight = 40F;
-            this.column_Y2.HeaderText = "Y2";
-            this.column_Y2.Name = "column_Y2";
-            this.column_Y2.Width = 40;
             // 
             // groupBox2
             // 
@@ -279,6 +248,18 @@
             this.groupBox2.TabIndex = 54;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Настройка";
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Checked = true;
+            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox4.Location = new System.Drawing.Point(123, 69);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(76, 17);
+            this.checkBox4.TabIndex = 65;
+            this.checkBox4.Text = "Разметка";
+            this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // checkBox3
             // 
@@ -441,7 +422,7 @@
             this.groupBox4.Controls.Add(this.posY2r_textbox);
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.posY1r_textbox);
-            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.rectanglName_textbox);
             this.groupBox4.Controls.Add(this.posX2r_textbox);
             this.groupBox4.Controls.Add(this.posX1r_textbox);
             this.groupBox4.Location = new System.Drawing.Point(684, 347);
@@ -463,7 +444,7 @@
             // 
             // PictureRectangle_btn
             // 
-            this.PictureRectangle_btn.Location = new System.Drawing.Point(165, 45);
+            this.PictureRectangle_btn.Location = new System.Drawing.Point(165, 47);
             this.PictureRectangle_btn.Name = "PictureRectangle_btn";
             this.PictureRectangle_btn.Size = new System.Drawing.Size(78, 23);
             this.PictureRectangle_btn.TabIndex = 61;
@@ -474,7 +455,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 76);
+            this.label9.Location = new System.Drawing.Point(7, 80);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 13);
             this.label9.TabIndex = 60;
@@ -483,7 +464,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 50);
+            this.label8.Location = new System.Drawing.Point(7, 54);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 13);
             this.label8.TabIndex = 59;
@@ -491,7 +472,7 @@
             // 
             // posY2r_textbox
             // 
-            this.posY2r_textbox.Location = new System.Drawing.Point(113, 73);
+            this.posY2r_textbox.Location = new System.Drawing.Point(113, 76);
             this.posY2r_textbox.Name = "posY2r_textbox";
             this.posY2r_textbox.Size = new System.Drawing.Size(46, 20);
             this.posY2r_textbox.TabIndex = 54;
@@ -500,7 +481,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 21);
+            this.label1.Location = new System.Drawing.Point(6, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 3;
@@ -508,24 +489,24 @@
             // 
             // posY1r_textbox
             // 
-            this.posY1r_textbox.Location = new System.Drawing.Point(113, 48);
+            this.posY1r_textbox.Location = new System.Drawing.Point(113, 50);
             this.posY1r_textbox.Name = "posY1r_textbox";
             this.posY1r_textbox.Size = new System.Drawing.Size(46, 20);
             this.posY1r_textbox.TabIndex = 53;
             this.posY1r_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox1
+            // rectanglName_textbox
             // 
-            this.textBox1.Location = new System.Drawing.Point(90, 18);
-            this.textBox1.MaxLength = 4;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(77, 20);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "ABCD";
+            this.rectanglName_textbox.Location = new System.Drawing.Point(90, 21);
+            this.rectanglName_textbox.MaxLength = 4;
+            this.rectanglName_textbox.Name = "rectanglName_textbox";
+            this.rectanglName_textbox.Size = new System.Drawing.Size(77, 20);
+            this.rectanglName_textbox.TabIndex = 2;
+            this.rectanglName_textbox.Text = "ABCD";
             // 
             // posX2r_textbox
             // 
-            this.posX2r_textbox.Location = new System.Drawing.Point(61, 74);
+            this.posX2r_textbox.Location = new System.Drawing.Point(61, 76);
             this.posX2r_textbox.Name = "posX2r_textbox";
             this.posX2r_textbox.Size = new System.Drawing.Size(46, 20);
             this.posX2r_textbox.TabIndex = 52;
@@ -533,7 +514,7 @@
             // 
             // posX1r_textbox
             // 
-            this.posX1r_textbox.Location = new System.Drawing.Point(61, 48);
+            this.posX1r_textbox.Location = new System.Drawing.Point(61, 50);
             this.posX1r_textbox.Name = "posX1r_textbox";
             this.posX1r_textbox.Size = new System.Drawing.Size(46, 20);
             this.posX1r_textbox.TabIndex = 51;
@@ -558,18 +539,6 @@
             this.groupPicturebox.TabIndex = 0;
             this.groupPicturebox.TabStop = false;
             // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Checked = true;
-            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox4.Location = new System.Drawing.Point(123, 69);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(76, 17);
-            this.checkBox4.TabIndex = 65;
-            this.checkBox4.Text = "Разметка";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(907, 712);
@@ -579,6 +548,46 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // column_Name
+            // 
+            this.column_Name.HeaderText = "Прямая";
+            this.column_Name.Name = "column_Name";
+            this.column_Name.Width = 50;
+            // 
+            // column_X1
+            // 
+            this.column_X1.FillWeight = 40F;
+            this.column_X1.HeaderText = "X1";
+            this.column_X1.Name = "column_X1";
+            this.column_X1.Width = 40;
+            // 
+            // column_Y1
+            // 
+            this.column_Y1.FillWeight = 40F;
+            this.column_Y1.HeaderText = "Y1";
+            this.column_Y1.Name = "column_Y1";
+            this.column_Y1.Width = 40;
+            // 
+            // column_X2
+            // 
+            this.column_X2.FillWeight = 40F;
+            this.column_X2.HeaderText = "X2";
+            this.column_X2.Name = "column_X2";
+            this.column_X2.Width = 40;
+            // 
+            // column_Y2
+            // 
+            this.column_Y2.FillWeight = 40F;
+            this.column_Y2.HeaderText = "Y2";
+            this.column_Y2.Name = "column_Y2";
+            this.column_Y2.Width = 40;
+            // 
+            // Group
+            // 
+            this.Group.HeaderText = "Выбр.";
+            this.Group.Name = "Group";
+            this.Group.Width = 40;
             // 
             // Form1
             // 
@@ -597,7 +606,7 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Draw Lines 1.0";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.posY2_textbox)).EndInit();
@@ -648,11 +657,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button PictureFromTable_btn;
         private System.Windows.Forms.Button DeleteFromTable_btn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_X1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_Y1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_X2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_Y2;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Button SelectRectangle_btn;
@@ -661,7 +665,7 @@
         private System.Windows.Forms.NumericUpDown posY2r_textbox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown posY1r_textbox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox rectanglName_textbox;
         private System.Windows.Forms.NumericUpDown posX2r_textbox;
         private System.Windows.Forms.NumericUpDown posX1r_textbox;
         private System.Windows.Forms.Button PictureRandomRectangle_btn;
@@ -672,6 +676,12 @@
         private System.Windows.Forms.PictureBox groupPicturebox;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_X1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_Y1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_X2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_Y2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Group;
     }
 }
 
