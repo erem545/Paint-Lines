@@ -222,7 +222,23 @@ namespace Lab1
             }            
             screen = (Bitmap)tempDraw.Clone();
         }
-        private void PaintRectangle(Line _line1, Line _line2, Line _line3, Line _line4)
+        private void posX1_textbox_Click(object sender, EventArgs e)
+        {
+            posX1_textbox.Text = "";
+        }
+        private void posY1_textbox_Click(object sender, EventArgs e)
+        {
+            posY1_textbox.Text = "";
+        }
+        private void posX2_textbox_Click(object sender, EventArgs e)
+        {
+            posX2_textbox.Text = "";
+        }
+        private void posY2_textbox_Click(object sender, EventArgs e)
+        {
+            posY2_textbox.Text = "";
+        }
+        private void textBox7_Click(object sender, EventArgs e)
         {
             PaintLine(ref snapshot, _line1, selectColor(), lineWight);
             PaintLine(ref snapshot, _line2, selectColor(), lineWight);
