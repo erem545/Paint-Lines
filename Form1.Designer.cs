@@ -158,7 +158,7 @@
             this.PictureLine_btn.TabIndex = 27;
             this.PictureLine_btn.Text = "Изобразить";
             this.PictureLine_btn.UseVisualStyleBackColor = true;
-            this.PictureLine_btn.Click += new System.EventHandler(this.button1_Click);
+            this.PictureLine_btn.Click += new System.EventHandler(this.PictureLine_btn_Click);
             // 
             // posX1_textbox
             // 
@@ -231,7 +231,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(287, 273);
             this.dataGridView1.TabIndex = 52;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            this.dataGridView1.Click += new System.EventHandler(this.button1_Click);
             // 
             // column_Name
             // 
@@ -614,8 +613,8 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.Text = "Draw Lines 1.0";
