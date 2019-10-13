@@ -41,6 +41,12 @@
             this.secondName_txt = new System.Windows.Forms.TextBox();
             this.ClearAll_btn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.column_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_X1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Y1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_X2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Y2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Group = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -70,12 +76,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupPicturebox = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.column_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_X1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Y1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_X2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Y2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Group = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.lengthLine_txt = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.posY2_textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posY1_textbox)).BeginInit();
@@ -231,6 +232,46 @@
             this.dataGridView1.TabIndex = 52;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // column_Name
+            // 
+            this.column_Name.HeaderText = "Прямая";
+            this.column_Name.Name = "column_Name";
+            this.column_Name.Width = 50;
+            // 
+            // column_X1
+            // 
+            this.column_X1.FillWeight = 40F;
+            this.column_X1.HeaderText = "X1";
+            this.column_X1.Name = "column_X1";
+            this.column_X1.Width = 40;
+            // 
+            // column_Y1
+            // 
+            this.column_Y1.FillWeight = 40F;
+            this.column_Y1.HeaderText = "Y1";
+            this.column_Y1.Name = "column_Y1";
+            this.column_Y1.Width = 40;
+            // 
+            // column_X2
+            // 
+            this.column_X2.FillWeight = 40F;
+            this.column_X2.HeaderText = "X2";
+            this.column_X2.Name = "column_X2";
+            this.column_X2.Width = 40;
+            // 
+            // column_Y2
+            // 
+            this.column_Y2.FillWeight = 40F;
+            this.column_Y2.HeaderText = "Y2";
+            this.column_Y2.Name = "column_Y2";
+            this.column_Y2.Width = 40;
+            // 
+            // Group
+            // 
+            this.Group.HeaderText = "Выбр.";
+            this.Group.Name = "Group";
+            this.Group.Width = 40;
             // 
             // groupBox2
             // 
@@ -549,45 +590,15 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // column_Name
+            // lengthLine_txt
             // 
-            this.column_Name.HeaderText = "Прямая";
-            this.column_Name.Name = "column_Name";
-            this.column_Name.Width = 50;
-            // 
-            // column_X1
-            // 
-            this.column_X1.FillWeight = 40F;
-            this.column_X1.HeaderText = "X1";
-            this.column_X1.Name = "column_X1";
-            this.column_X1.Width = 40;
-            // 
-            // column_Y1
-            // 
-            this.column_Y1.FillWeight = 40F;
-            this.column_Y1.HeaderText = "Y1";
-            this.column_Y1.Name = "column_Y1";
-            this.column_Y1.Width = 40;
-            // 
-            // column_X2
-            // 
-            this.column_X2.FillWeight = 40F;
-            this.column_X2.HeaderText = "X2";
-            this.column_X2.Name = "column_X2";
-            this.column_X2.Width = 40;
-            // 
-            // column_Y2
-            // 
-            this.column_Y2.FillWeight = 40F;
-            this.column_Y2.HeaderText = "Y2";
-            this.column_Y2.Name = "column_Y2";
-            this.column_Y2.Width = 40;
-            // 
-            // Group
-            // 
-            this.Group.HeaderText = "Выбр.";
-            this.Group.Name = "Group";
-            this.Group.Width = 40;
+            this.lengthLine_txt.AutoSize = true;
+            this.lengthLine_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lengthLine_txt.Location = new System.Drawing.Point(681, 675);
+            this.lengthLine_txt.Name = "lengthLine_txt";
+            this.lengthLine_txt.Size = new System.Drawing.Size(62, 20);
+            this.lengthLine_txt.TabIndex = 60;
+            this.lengthLine_txt.Text = "Длина:";
             // 
             // Form1
             // 
@@ -595,6 +606,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(994, 747);
+            this.Controls.Add(this.lengthLine_txt);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.SelectLine_btn);
@@ -629,6 +641,7 @@
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupPicturebox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -682,6 +695,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn column_X2;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_Y2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Group;
+        private System.Windows.Forms.Label lengthLine_txt;
     }
 }
 

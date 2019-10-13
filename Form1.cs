@@ -151,6 +151,18 @@ namespace Lab1
             }
         }
         #endregion
+        
+        /// <summary>
+        /// Вычислить длину выбранной линии
+        /// </summary>
+        /// <param name="_line">Линия</param>
+        private void CalculateLengthLine(Line _line)
+        {
+            double l1 = Math.Abs(_line.Point1.posX - _line.Point2.posX);
+            double l2 = Math.Abs(_line.Point1.posY - _line.Point2.posY);
+            double length = Math.Sqrt((l1 * l1) + (l2 * l2));
+            lengthLine_txt.Text = $"Длина {_line.NameLine}: {length}";
+        }
 
         #region Draw
         /// <summary>
@@ -237,13 +249,6 @@ namespace Lab1
         private void posY2_textbox_Click(object sender, EventArgs e)
         {
             posY2_textbox.Text = "";
-        }
-        private void textBox7_Click(object sender, EventArgs e)
-        {
-            PaintLine(ref snapshot, _line1, selectColor(), lineWight);
-            PaintLine(ref snapshot, _line2, selectColor(), lineWight);
-            PaintLine(ref snapshot, _line3, selectColor(), lineWight);
-            PaintLine(ref snapshot, _line4, selectColor(), lineWight);
         }
         /// <summary>
         /// Координатная ось
@@ -370,7 +375,7 @@ namespace Lab1
               name[1].ToString(),
               new Point(Convert.ToInt32(posX2r_textbox.Text), Convert.ToInt32(posY1r_textbox.Text)));
             InsertInList(_t1, tempList);
-            PaintLine(ref tempDraw, _t1, Color.Black, lineWight);
+            PaintLine(ref tempDraw, _t1, selectColor(), lineWight);
 
             Line _t2 = new Line(
              name[1].ToString(),
@@ -378,7 +383,7 @@ namespace Lab1
              name[2].ToString(),
              new Point(Convert.ToInt32(posX2r_textbox.Text), Convert.ToInt32(posY2r_textbox.Text)));
             InsertInList(_t2, tempList);
-            PaintLine(ref tempDraw, _t2, Color.Black, lineWight);
+            PaintLine(ref tempDraw, _t2, selectColor(), lineWight);
 
             Line _t3 = new Line(
              name[2].ToString(),
@@ -386,7 +391,7 @@ namespace Lab1
              name[3].ToString(),
              new Point(Convert.ToInt32(posX1r_textbox.Text), Convert.ToInt32(posY2r_textbox.Text)));
             InsertInList(_t3, tempList);
-            PaintLine(ref tempDraw, _t3, Color.Black, lineWight);
+            PaintLine(ref tempDraw, _t3, selectColor(), lineWight);
 
             Line _t4 = new Line(
              name[3].ToString(),
@@ -394,9 +399,8 @@ namespace Lab1
              name[0].ToString(),
              new Point(Convert.ToInt32(posX1r_textbox.Text), Convert.ToInt32(posY1r_textbox.Text)));
             InsertInList(_t4, tempList);
-            PaintLine(ref tempDraw, _t4, Color.Black, lineWight);
+            PaintLine(ref tempDraw, _t4, selectColor(), lineWight);
 
-            PaintRectangle(_t1,_t2,_t3,_t4);
             pictureBox1.Image = snapshot;
             snapshot = (Bitmap)tempDraw.Clone();
         }
@@ -493,6 +497,7 @@ namespace Lab1
             PaintLine(ref snapshot, selectedLine, Color.Red, lineWight + 1);
             if (LinesListGroup != null)
                 LinesListGroup.Add(CreateObjFromLine(_line));
+            CalculateLengthLine(_line);
             //PaintSelectLine();
             //LinesListGroup = new List<List<object>>();
         }
