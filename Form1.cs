@@ -270,27 +270,17 @@ namespace Lab1
             Pen line = new Pen(Brushes.LightGray, 1);
             Pen line1 = new Pen(Brushes.Black, 1);
 
-            //if (checkBox4.Checked == true)
-            //{
-            //    const int lenght = 6; // Длинна прочерков
-            //                          // Рисовать разметку по X
-            //    for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
-            //        for (int j = indent; j <= size + sizeDiv; j += lenght - 2)
-            //            g.DrawLine(line, i, j, i, j += lenght);
-            //    // Рисовать разметку по Y
-            //    for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
-            //        for (int j = indent; j <= size + sizeDiv; j += lenght - 2)
-            //            g.DrawLine(line, j, i, j += lenght, i);
-            //}
-
             if (checkBox4.Checked == true)
             {
-                // Рисовать разметку по X
-                for (int i = indent + sizeDiv; i <= size + (sizeDiv * 2); i += sizeDiv)
-                        g.DrawLine(line, i, indent, i, sizeDiv * maxValue  + maxValue);
+                const int lenght = 6; // Длинна прочерков
+                                      // Рисовать разметку по X
+                for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
+                    for (int j = indent; j <= size + sizeDiv; j += lenght - 2)
+                        g.DrawLine(line, i, j, i, j += lenght);
                 // Рисовать разметку по Y
-                for (int i = indent + sizeDiv; i <= size + (sizeDiv * 2); i += sizeDiv)
-                        g.DrawLine(line, indent, i, sizeDiv * maxValue + maxValue, i);
+                for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
+                    for (int j = indent; j <= size + sizeDiv; j += lenght - 2)
+                        g.DrawLine(line, j, i, j += lenght, i);
             }
 
             // Ось OX
@@ -375,7 +365,7 @@ namespace Lab1
                          new Point(Convert.ToInt32(posX1_textbox.Text), Convert.ToInt32(posY1_textbox.Text)),
                          secondName_txt.Text,
                          new Point(Convert.ToInt32(posX2_textbox.Text), Convert.ToInt32(posY2_textbox.Text)));
-            PaintLine(ref snapshot, _t, selectColor(), lineWight, 0);
+            PaintLine(ref snapshot, _t, ForeColor, lineWight, 0);
             InsertInList(_t, tempList);
             pictureBox1.Image = snapshot;
         }
@@ -420,6 +410,15 @@ namespace Lab1
             snapshot = (Bitmap)tempDraw.Clone();
         }
 
+        /// <summary>
+        /// Кнопка Изобразить 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = snapshot;
+        }
         /// <summary>
         /// Кнопка Отчистить все (в т.ч. datagridview)
         /// </summary>
@@ -689,12 +688,6 @@ namespace Lab1
                   , "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void PictureLine_btn_Click(object sender, EventArgs e)
-        {
-            CreateLine();
-            snapshot = (Bitmap)tempDraw.Clone();
-        }
-
         #endregion
 
         /// <summary>
@@ -715,7 +708,6 @@ namespace Lab1
                 PaintSelectLineList(LinesListGroup);
                 CheckCheckedInTable();
             }
-            pictureBox1.Image = snapshot;
         }
 
         public Form1()
