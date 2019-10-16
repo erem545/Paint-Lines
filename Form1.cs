@@ -60,11 +60,18 @@ namespace Lab1
         /// <returns></returns>
         private Line CreateLineFromObj(List<object> _list)
         {
-            Line line = new Line(
-                new Point(_list[0].ToString()[0].ToString(), Convert.ToInt32(_list[1]), Convert.ToInt32(_list[2])),
-                new Point(_list[0].ToString()[1].ToString(), Convert.ToInt32(_list[3]), Convert.ToInt32(_list[4]))
-                );
-            return line;
+            try
+            {
+                Line line = new Line(
+                    new Point(_list[0].ToString()[0].ToString(), Convert.ToInt32(_list[1]), Convert.ToInt32(_list[2])),
+                    new Point(_list[0].ToString()[1].ToString(), Convert.ToInt32(_list[3]), Convert.ToInt32(_list[4]))
+                    );
+                return line;
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -178,6 +185,7 @@ namespace Lab1
             DrawLinesOnList(LinesList);
             pictureBox1.Image = snapshot;
         }
+
         #region Draw
 
         /// <summary>
@@ -190,68 +198,38 @@ namespace Lab1
         /// <param name="_pointSize">Размер точки (0 - стандартно (_lineWeight), 1, 2, 3,... - Увеличение точки)</param>
         private void PaintLine(ref Bitmap _screen, Line _line, Color _color, int _lineWeight, int _pointSize)
         {
-            // Параметры первой точки
-            string name1 = _line.Point1.Name;
-            int X1 = Convert.ToInt32(_line.Point1.posX ) * sizeDiv + indent;
-            int Y1 = Convert.ToInt32(_line.Point1.posY ) * sizeDiv + indent;
-
-            // Параметры второй точки
-            string name2 = _line.Point2.Name;
-            int X2 = Convert.ToInt32(_line.Point2.posX) * sizeDiv + indent;
-            int Y2 = Convert.ToInt32(_line.Point2.posY) * sizeDiv + indent;
-
             tempDraw = _screen;
             Graphics g = Graphics.FromImage(tempDraw);
 
             // Инструменты
             Pen pen = new Pen(_color, _lineWeight);
-            Pen linesXY = new Pen(_color, 1);
 
-            // Рисовать точки 
-            PaintPoint(ref tempDraw, name1, X1, Y1, _color, _lineWeight + _pointSize - 1);
-            PaintPoint(ref tempDraw, name2, X2, Y2, _color, _lineWeight + _pointSize - 1);
-
-            // Подписать координаты на оси
-            g.DrawString(Convert.ToString(_line.Point1.posX), new Font("Arial", 10), Brushes.Black, X1 - 5, indent - 20);
-            g.DrawString(Convert.ToString(_line.Point1.posY), new Font("Arial", 10), Brushes.Black, indent - 20, Y1 - 5);
-            g.DrawString(Convert.ToString(_line.Point2.posX), new Font("Arial", 10), Brushes.Black, X2 - 5, indent - 20);
-            g.DrawString(Convert.ToString(_line.Point2.posY), new Font("Arial", 10), Brushes.Black, indent - 20, Y2 - 5);
-
-            // Рисовать основной линии
-            if (checkBox3.Checked == true)
+            try
             {
-                g.DrawLine(pen, X1, Y1, X2, Y2);
-            }
-            // Рисовать линии к осям OX OY
-            if (checkBox1.Checked == true)
-            {
-                // Циклы для рисования прерывестых линий к началу осям OX и OY
-                // Константа размера прочерков
-                const int length = 4;
+                // Параметры первой точки
+                string name1 = _line.Point1.Name;
+                int X1 = Convert.ToInt32(_line.Point1.posX) * sizeDiv + indent;
+                int Y1 = Convert.ToInt32(_line.Point1.posY) * sizeDiv + indent;
 
-                for (int i1 = Y1; i1 > indent; i1 -= length)
-                {   
-                    g.DrawLine(linesXY, X1, i1 - length, X1, i1);
-                    i1 -= length;
-                }
-                for (int i2 = X1; i2 > indent; i2 -= length)
-                {
-                    g.DrawLine(linesXY, i2 - length, Y1, i2, Y1);
-                    i2 -= length;
-                }
-                for (int i3 = Y2; i3 > indent; i3 -= length)
-                {
-                    g.DrawLine(linesXY, X2, i3 , X2, i3 - length);
-                    i3 -= length;
-                }
-                for (int i4 = X2; i4 > indent; i4 -= length)
-                {
-                    g.DrawLine(linesXY, i4, Y2, i4 - length, Y2);
-                    i4 -= length;
-                }
+                // Параметры второй точки
+                string name2 = _line.Point2.Name;
+                int X2 = Convert.ToInt32(_line.Point2.posX) * sizeDiv + indent;
+                int Y2 = Convert.ToInt32(_line.Point2.posY) * sizeDiv + indent;
+
+                // Рисовать точки 
+                PaintPoint(ref snapshot, name1, X1, Y1, _color, _lineWeight + _pointSize - 1);
+                PaintPoint(ref snapshot, name2, X2, Y2, _color, _lineWeight + _pointSize - 1);
+
+                // Рисовать основной линии
+                if (checkBox3.Checked == true)
+                    g.DrawLine(pen, X1, Y1, X2, Y2);
+
+                _screen = (Bitmap)tempDraw.Clone();
             }
-         
-            _screen = (Bitmap)tempDraw.Clone();
+            catch (NullReferenceException)
+            {
+                return;
+            }
         }
 
         /// <summary>
@@ -302,6 +280,15 @@ namespace Lab1
             g.DrawString("Y",  new Font("Arial", 10, FontStyle.Bold), Brushes.Black, indent - 20, indent + size);
             g.DrawLine(pen, indent, indent, indent, indent + size);
 
+            // Подписать координаты на оси
+            int index = 1;
+            while (index < 30)
+            {
+                g.DrawString(Convert.ToString(index), new Font("Arial", 10), Brushes.Black, (index+1) * sizeDiv, indent - 20);
+                g.DrawString(Convert.ToString(index), new Font("Arial", 10), Brushes.Black, indent - 20, (index+1) * sizeDiv);
+                index++;
+            }
+
             // Рисовать даления на линии оси X
             for (int i = indent + sizeDiv; i <= size + sizeDiv; i += sizeDiv)
                 g.DrawLine(line1, i, indent - 3, i, indent + 3);
@@ -327,12 +314,30 @@ namespace Lab1
             tempDraw = _screen;
             Graphics g = Graphics.FromImage(tempDraw);
             Pen point = new Pen(_color, _pointSize);
+            Pen linesXY = new Pen(_color, 1);
             g.DrawRectangle(point, _x, _y, _pointSize, _pointSize);
 
-            // Рисовать наименования точек
-            if (checkBox2.Checked == true)
-            {             
+            // Рисовать наименование точки
+            if (checkBox2.Checked == true)        
                 g.DrawString(_name.ToString(), new Font("Arial", 12, FontStyle.Bold), Brushes.Black, _x, _y);
+
+            // Рисование прерывестых линий к началу осям OX и OY
+            if (checkBox1.Checked == true)
+            {
+                // Циклы для рисования прерывестых линий к началу осям OX и OY
+                // Константа размера прочерков
+                const int length = 4;
+
+                for (int i1 = _y; i1 > indent; i1 -= length)
+                {
+                    g.DrawLine(linesXY, _x, i1 - length, _x, i1);
+                    i1 -= length;
+                }
+                for (int i2 = _x; i2 > indent; i2 -= length)
+                {
+                    g.DrawLine(linesXY, i2 - length, _y, i2, _y);
+                    i2 -= length;
+                }
             }
         }
         #endregion
@@ -542,9 +547,9 @@ namespace Lab1
             Line selectedLine = _line;
             DrawLinesOnList(LinesList);
             PaintLine(ref snapshot, selectedLine, _color, lineWight + 1, 0);
-            //PaintLine(ref snapshot, selectedLine, selectColor(), lineWight, 0);
             if (LinesListGroup != null)
                 LinesListGroup.Add(CreateObjFromLine(_line));
+
             CalculateLengthLine(_line);
             pictureBox1.Image = snapshot;
         }
@@ -740,6 +745,47 @@ namespace Lab1
             pictureBox1.Update();
         }
 
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            int _X = e.X;
+            int _Y = e.Y;
+
+            _X = _X / 10;
+            _Y = _Y / 10;
+
+            // Выравнивание точки по разметки OX
+            if (_X % 2 != 0)
+            {
+                _X *= 10;
+            }
+            else
+            {       
+                while (_X % 2 == 0)
+                    _X++;
+                _X *= 10;
+            }
+            // Выравнивание точки по разметки OY
+            if (_Y % 2 != 0)
+            {
+                _Y *= 10;
+            }
+            else
+            {
+                while (_Y % 2 == 0)
+                    _Y++;
+                _Y *= 10;
+            }
+            RefreshPicture();
+            PaintPoint(ref snapshot, "", _X, _Y, Color.Red, lineWight);
+
+            textBox1.Text = $"{_X / sizeDiv - 1}:{_Y / sizeDiv - 1}";
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            pictureBox1.Image = snapshot;        
+        }
+
         #endregion
 
         /// <summary>
@@ -749,16 +795,22 @@ namespace Lab1
         /// <param name="e"></param>
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+
             // Выбранный элемент таблицы
             int index = dataGridView1.CurrentRow.Index;
-            if (index < LinesList.Count)
-            {                
-                List<object> obj = LinesList.ElementAt(index);              
-                SelectLine(CreateLineFromObj(obj), Color.Blue);
-                LinesListGroup = new List<List<object>>();
-                LinesListGroup.Add(obj);
-                //PaintSelectLineList(LinesListGroup);
-                //CheckCheckedInTable();            
+            try
+            {
+                if (index < LinesList.Count)
+                {
+                    List<object> obj = LinesList.ElementAt(index);
+                    SelectLine(CreateLineFromObj(obj), Color.Blue);
+                    LinesListGroup = new List<List<object>>();
+                    LinesListGroup.Add(obj);         
+                }
+            }
+            catch (NullReferenceException)
+            {
+                return;
             }
         }
 
