@@ -11,14 +11,16 @@ namespace Lab1
     {
         public int posX { get; set; }
         public int posY { get; set; }
+        public string Name { get; set; }
 
         public Point()
         {
             posX = -1;
             posY = -1;
         }
-        public Point(int x, int y)
+        public Point(string name, int x, int y)
         {
+            Name = name;
             posX = x;
             posY = y;
         }

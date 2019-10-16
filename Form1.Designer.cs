@@ -41,12 +41,6 @@
             this.secondName_txt = new System.Windows.Forms.TextBox();
             this.ClearAll_btn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.column_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_X1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Y1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_X2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Y2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Group = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -77,6 +71,13 @@
             this.groupPicturebox = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lengthLine_txt = new System.Windows.Forms.Label();
+            this.column_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_X1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Y1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_X2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Y2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.posY2_textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posY1_textbox)).BeginInit();
@@ -119,6 +120,11 @@
             // posY2_textbox
             // 
             this.posY2_textbox.Location = new System.Drawing.Point(113, 76);
+            this.posY2_textbox.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
             this.posY2_textbox.Name = "posY2_textbox";
             this.posY2_textbox.Size = new System.Drawing.Size(46, 20);
             this.posY2_textbox.TabIndex = 38;
@@ -127,6 +133,11 @@
             // posY1_textbox
             // 
             this.posY1_textbox.Location = new System.Drawing.Point(113, 50);
+            this.posY1_textbox.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
             this.posY1_textbox.Name = "posY1_textbox";
             this.posY1_textbox.Size = new System.Drawing.Size(46, 20);
             this.posY1_textbox.TabIndex = 37;
@@ -135,6 +146,11 @@
             // posX2_textbox
             // 
             this.posX2_textbox.Location = new System.Drawing.Point(61, 76);
+            this.posX2_textbox.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
             this.posX2_textbox.Name = "posX2_textbox";
             this.posX2_textbox.Size = new System.Drawing.Size(46, 20);
             this.posX2_textbox.TabIndex = 36;
@@ -163,6 +179,11 @@
             // posX1_textbox
             // 
             this.posX1_textbox.Location = new System.Drawing.Point(61, 50);
+            this.posX1_textbox.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
             this.posX1_textbox.Name = "posX1_textbox";
             this.posX1_textbox.Size = new System.Drawing.Size(46, 20);
             this.posX1_textbox.TabIndex = 35;
@@ -222,8 +243,7 @@
             this.column_X1,
             this.column_Y1,
             this.column_X2,
-            this.column_Y2,
-            this.Group});
+            this.column_Y2});
             this.dataGridView1.Location = new System.Drawing.Point(6, 19);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -231,47 +251,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(287, 273);
             this.dataGridView1.TabIndex = 52;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            this.dataGridView1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // column_Name
-            // 
-            this.column_Name.HeaderText = "Прямая";
-            this.column_Name.Name = "column_Name";
-            this.column_Name.Width = 50;
-            // 
-            // column_X1
-            // 
-            this.column_X1.FillWeight = 40F;
-            this.column_X1.HeaderText = "X1";
-            this.column_X1.Name = "column_X1";
-            this.column_X1.Width = 40;
-            // 
-            // column_Y1
-            // 
-            this.column_Y1.FillWeight = 40F;
-            this.column_Y1.HeaderText = "Y1";
-            this.column_Y1.Name = "column_Y1";
-            this.column_Y1.Width = 40;
-            // 
-            // column_X2
-            // 
-            this.column_X2.FillWeight = 40F;
-            this.column_X2.HeaderText = "X2";
-            this.column_X2.Name = "column_X2";
-            this.column_X2.Width = 40;
-            // 
-            // column_Y2
-            // 
-            this.column_Y2.FillWeight = 40F;
-            this.column_Y2.HeaderText = "Y2";
-            this.column_Y2.Name = "column_Y2";
-            this.column_Y2.Width = 40;
-            // 
-            // Group
-            // 
-            this.Group.HeaderText = "Выбр.";
-            this.Group.Name = "Group";
-            this.Group.Width = 40;
             // 
             // groupBox2
             // 
@@ -437,22 +416,22 @@
             // SelectRectangle_btn
             // 
             this.SelectRectangle_btn.Image = global::Lab1.Properties.Resources.rectangle1;
-            this.SelectRectangle_btn.Location = new System.Drawing.Point(688, 529);
+            this.SelectRectangle_btn.Location = new System.Drawing.Point(734, 529);
             this.SelectRectangle_btn.Name = "SelectRectangle_btn";
             this.SelectRectangle_btn.Size = new System.Drawing.Size(45, 45);
             this.SelectRectangle_btn.TabIndex = 51;
             this.SelectRectangle_btn.UseVisualStyleBackColor = true;
-            this.SelectRectangle_btn.Click += new System.EventHandler(this.button8_Click);
+            this.SelectRectangle_btn.Click += new System.EventHandler(this.SelectRectangle_btn_Click);
             // 
             // SelectLine_btn
             // 
             this.SelectLine_btn.Image = global::Lab1.Properties.Resources.line;
-            this.SelectLine_btn.Location = new System.Drawing.Point(737, 529);
+            this.SelectLine_btn.Location = new System.Drawing.Point(683, 529);
             this.SelectLine_btn.Name = "SelectLine_btn";
             this.SelectLine_btn.Size = new System.Drawing.Size(45, 45);
             this.SelectLine_btn.TabIndex = 52;
             this.SelectLine_btn.UseVisualStyleBackColor = true;
-            this.SelectLine_btn.Click += new System.EventHandler(this.button9_Click);
+            this.SelectLine_btn.Click += new System.EventHandler(this.SelectLine_btn_Click);
             // 
             // groupBox4
             // 
@@ -586,7 +565,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 59;
-            this.button1.Text = "button1";
+            this.button1.Text = "Справка";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -600,12 +579,67 @@
             this.lengthLine_txt.TabIndex = 60;
             this.lengthLine_txt.Text = "Длина:";
             // 
+            // column_Name
+            // 
+            this.column_Name.HeaderText = "Прямая";
+            this.column_Name.Name = "column_Name";
+            this.column_Name.Width = 50;
+            // 
+            // column_X1
+            // 
+            this.column_X1.FillWeight = 40F;
+            this.column_X1.HeaderText = "X1";
+            this.column_X1.Name = "column_X1";
+            this.column_X1.Width = 40;
+            // 
+            // column_Y1
+            // 
+            this.column_Y1.FillWeight = 40F;
+            this.column_Y1.HeaderText = "Y1";
+            this.column_Y1.Name = "column_Y1";
+            this.column_Y1.Width = 40;
+            // 
+            // column_X2
+            // 
+            this.column_X2.FillWeight = 40F;
+            this.column_X2.HeaderText = "X2";
+            this.column_X2.Name = "column_X2";
+            this.column_X2.Width = 40;
+            // 
+            // column_Y2
+            // 
+            this.column_Y2.FillWeight = 40F;
+            this.column_Y2.HeaderText = "Y2";
+            this.column_Y2.Name = "column_Y2";
+            this.column_Y2.Width = 40;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(683, 712);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 61;
+            this.button2.Text = "Отчистить";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(826, 712);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 62;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(994, 747);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.lengthLine_txt);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox5);
@@ -614,8 +648,8 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.Text = "Draw Lines 1.0";
@@ -689,13 +723,14 @@
         private System.Windows.Forms.PictureBox groupPicturebox;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lengthLine_txt;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_X1;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_Y1;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_X2;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_Y2;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Group;
-        private System.Windows.Forms.Label lengthLine_txt;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
