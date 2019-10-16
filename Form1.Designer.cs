@@ -417,7 +417,7 @@
             // 
             // SelectRectangle_btn
             // 
-            this.SelectRectangle_btn.Image = global::Lab1.Properties.Resources.rectangle1;
+            this.SelectRectangle_btn.Image = global::Lab1.Properties.Resources.rectangle;
             this.SelectRectangle_btn.Location = new System.Drawing.Point(734, 529);
             this.SelectRectangle_btn.Name = "SelectRectangle_btn";
             this.SelectRectangle_btn.Size = new System.Drawing.Size(45, 45);
