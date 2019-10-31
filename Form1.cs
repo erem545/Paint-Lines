@@ -550,6 +550,7 @@ namespace Lab1
                 LinesListGroup.Add(CreateObjFromLine(_line));
 
             CalculateLengthLine(_line);
+            eduqationText_txt.Text = MatrixSystem.EquationLine(_line);
             pictureBox1.Image = snapshot;
         }
         private bool CheckSelected()

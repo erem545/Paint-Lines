@@ -41,6 +41,11 @@
             this.secondName_txt = new System.Windows.Forms.TextBox();
             this.ClearAll_btn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.column_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_X1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Y1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_X2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_Y2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -71,13 +76,9 @@
             this.groupPicturebox = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lengthLine_txt = new System.Windows.Forms.Label();
-            this.column_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_X1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Y1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_X2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_Y2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.eduqationText_txt = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.posY2_textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posY1_textbox)).BeginInit();
@@ -110,9 +111,9 @@
             this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.firstName_txt);
             this.groupBox1.Controls.Add(this.secondName_txt);
-            this.groupBox1.Location = new System.Drawing.Point(684, 347);
+            this.groupBox1.Location = new System.Drawing.Point(758, 417);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(298, 176);
+            this.groupBox1.Size = new System.Drawing.Size(298, 126);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Рисовать прямую";
@@ -252,6 +253,40 @@
             this.dataGridView1.TabIndex = 52;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
+            // column_Name
+            // 
+            this.column_Name.HeaderText = "Прямая";
+            this.column_Name.Name = "column_Name";
+            this.column_Name.Width = 50;
+            // 
+            // column_X1
+            // 
+            this.column_X1.FillWeight = 40F;
+            this.column_X1.HeaderText = "X1";
+            this.column_X1.Name = "column_X1";
+            this.column_X1.Width = 40;
+            // 
+            // column_Y1
+            // 
+            this.column_Y1.FillWeight = 40F;
+            this.column_Y1.HeaderText = "Y1";
+            this.column_Y1.Name = "column_Y1";
+            this.column_Y1.Width = 40;
+            // 
+            // column_X2
+            // 
+            this.column_X2.FillWeight = 40F;
+            this.column_X2.HeaderText = "X2";
+            this.column_X2.Name = "column_X2";
+            this.column_X2.Width = 40;
+            // 
+            // column_Y2
+            // 
+            this.column_Y2.FillWeight = 40F;
+            this.column_Y2.HeaderText = "Y2";
+            this.column_Y2.Name = "column_Y2";
+            this.column_Y2.Width = 40;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.checkBox4);
@@ -262,7 +297,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Location = new System.Drawing.Point(683, 580);
+            this.groupBox2.Location = new System.Drawing.Point(758, 600);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(299, 92);
             this.groupBox2.TabIndex = 54;
@@ -377,7 +412,7 @@
             this.groupBox3.Controls.Add(this.DeleteFromTable_btn);
             this.groupBox3.Controls.Add(this.dataGridView1);
             this.groupBox3.Controls.Add(this.ClearAll_btn);
-            this.groupBox3.Location = new System.Drawing.Point(684, 12);
+            this.groupBox3.Location = new System.Drawing.Point(757, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(298, 329);
             this.groupBox3.TabIndex = 55;
@@ -418,7 +453,7 @@
             // SelectRectangle_btn
             // 
             this.SelectRectangle_btn.Image = global::Lab1.Properties.Resources.rectangle;
-            this.SelectRectangle_btn.Location = new System.Drawing.Point(734, 529);
+            this.SelectRectangle_btn.Location = new System.Drawing.Point(808, 549);
             this.SelectRectangle_btn.Name = "SelectRectangle_btn";
             this.SelectRectangle_btn.Size = new System.Drawing.Size(45, 45);
             this.SelectRectangle_btn.TabIndex = 51;
@@ -428,7 +463,7 @@
             // SelectLine_btn
             // 
             this.SelectLine_btn.Image = global::Lab1.Properties.Resources.line;
-            this.SelectLine_btn.Location = new System.Drawing.Point(683, 529);
+            this.SelectLine_btn.Location = new System.Drawing.Point(757, 549);
             this.SelectLine_btn.Name = "SelectLine_btn";
             this.SelectLine_btn.Size = new System.Drawing.Size(45, 45);
             this.SelectLine_btn.TabIndex = 52;
@@ -447,9 +482,9 @@
             this.groupBox4.Controls.Add(this.rectanglName_textbox);
             this.groupBox4.Controls.Add(this.posX2r_textbox);
             this.groupBox4.Controls.Add(this.posX1r_textbox);
-            this.groupBox4.Location = new System.Drawing.Point(684, 347);
+            this.groupBox4.Location = new System.Drawing.Point(758, 417);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(298, 174);
+            this.groupBox4.Size = new System.Drawing.Size(298, 126);
             this.groupBox4.TabIndex = 57;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Рисовать квадрат";
@@ -563,7 +598,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(907, 712);
+            this.button1.Location = new System.Drawing.Point(982, 706);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 59;
@@ -575,50 +610,16 @@
             // 
             this.lengthLine_txt.AutoSize = true;
             this.lengthLine_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lengthLine_txt.Location = new System.Drawing.Point(681, 675);
+            this.lengthLine_txt.Location = new System.Drawing.Point(754, 344);
             this.lengthLine_txt.Name = "lengthLine_txt";
             this.lengthLine_txt.Size = new System.Drawing.Size(62, 20);
             this.lengthLine_txt.TabIndex = 60;
             this.lengthLine_txt.Text = "Длина:";
             // 
-            // column_Name
-            // 
-            this.column_Name.HeaderText = "Прямая";
-            this.column_Name.Name = "column_Name";
-            this.column_Name.Width = 50;
-            // 
-            // column_X1
-            // 
-            this.column_X1.FillWeight = 40F;
-            this.column_X1.HeaderText = "X1";
-            this.column_X1.Name = "column_X1";
-            this.column_X1.Width = 40;
-            // 
-            // column_Y1
-            // 
-            this.column_Y1.FillWeight = 40F;
-            this.column_Y1.HeaderText = "Y1";
-            this.column_Y1.Name = "column_Y1";
-            this.column_Y1.Width = 40;
-            // 
-            // column_X2
-            // 
-            this.column_X2.FillWeight = 40F;
-            this.column_X2.HeaderText = "X2";
-            this.column_X2.Name = "column_X2";
-            this.column_X2.Width = 40;
-            // 
-            // column_Y2
-            // 
-            this.column_Y2.FillWeight = 40F;
-            this.column_Y2.HeaderText = "Y2";
-            this.column_Y2.Name = "column_Y2";
-            this.column_Y2.Width = 40;
-            // 
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(683, 712);
+            this.button2.Location = new System.Drawing.Point(758, 706);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 61;
@@ -629,17 +630,28 @@
             // textBox1
             // 
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(925, 678);
+            this.textBox1.Location = new System.Drawing.Point(678, 12);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(57, 20);
             this.textBox1.TabIndex = 62;
+            // 
+            // eduqationText_txt
+            // 
+            this.eduqationText_txt.AutoSize = true;
+            this.eduqationText_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.eduqationText_txt.Location = new System.Drawing.Point(759, 375);
+            this.eduqationText_txt.Name = "eduqationText_txt";
+            this.eduqationText_txt.Size = new System.Drawing.Size(95, 20);
+            this.eduqationText_txt.TabIndex = 63;
+            this.eduqationText_txt.Text = "Уравнение:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(994, 747);
+            this.ClientSize = new System.Drawing.Size(1064, 747);
+            this.Controls.Add(this.eduqationText_txt);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.lengthLine_txt);
@@ -647,11 +659,11 @@
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.SelectLine_btn);
             this.Controls.Add(this.SelectRectangle_btn);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.Text = "Draw Lines 1.0";
@@ -733,6 +745,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn column_Y2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label eduqationText_txt;
     }
 }
 
