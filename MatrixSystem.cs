@@ -8,6 +8,12 @@ namespace Lab1
 {
     class MatrixSystem
     {
+        /// <summary>
+        /// Расчитать уравнение прямой из Point'ов
+        /// </summary>
+        /// <param name="_p1">объект Point</param>
+        /// <param name="_p2">объект Point</param>
+        /// <returns></returns>
         internal static string EquationLine(Point _p1, Point _p2)
         {
             int Vx = _p1.posY - _p2.posY;
@@ -20,6 +26,11 @@ namespace Lab1
             string str = Vx + "x + " + Vy + "y + " + Vz + " = 0";
             return str;
         }
+        /// <summary>
+        /// Расчитать уравнение прямой из Line
+        /// </summary>
+        /// <param name="_line">объект Line</param>
+        /// <returns></returns>
         internal static string EquationLine(Line _line)
         {
             int Vx = _line.Point1.posY - _line.Point2.posY;

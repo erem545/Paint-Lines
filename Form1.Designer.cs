@@ -72,8 +72,6 @@
             this.rectanglName_textbox = new System.Windows.Forms.TextBox();
             this.posX2r_textbox = new System.Windows.Forms.NumericUpDown();
             this.posX1r_textbox = new System.Windows.Forms.NumericUpDown();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.groupPicturebox = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lengthLine_txt = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -95,8 +93,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.posY1r_textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posX2r_textbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posX1r_textbox)).BeginInit();
-            this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupPicturebox)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -408,10 +404,10 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.ClearAll_btn);
             this.groupBox3.Controls.Add(this.PictureFromTable_btn);
             this.groupBox3.Controls.Add(this.DeleteFromTable_btn);
             this.groupBox3.Controls.Add(this.dataGridView1);
-            this.groupBox3.Controls.Add(this.ClearAll_btn);
             this.groupBox3.Location = new System.Drawing.Point(757, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(298, 329);
@@ -577,28 +573,9 @@
             this.posX1r_textbox.TabIndex = 51;
             this.posX1r_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.groupPicturebox);
-            this.groupBox5.Location = new System.Drawing.Point(12, 663);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(660, 72);
-            this.groupBox5.TabIndex = 58;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Группировка";
-            // 
-            // groupPicturebox
-            // 
-            this.groupPicturebox.BackColor = System.Drawing.Color.White;
-            this.groupPicturebox.Location = new System.Drawing.Point(6, 19);
-            this.groupPicturebox.Name = "groupPicturebox";
-            this.groupPicturebox.Size = new System.Drawing.Size(648, 47);
-            this.groupPicturebox.TabIndex = 0;
-            this.groupPicturebox.TabStop = false;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(982, 706);
+            this.button1.Location = new System.Drawing.Point(982, 692);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 59;
@@ -619,7 +596,7 @@
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(758, 706);
+            this.button2.Location = new System.Drawing.Point(757, 692);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 61;
@@ -650,13 +627,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1064, 747);
+            this.ClientSize = new System.Drawing.Size(1064, 718);
             this.Controls.Add(this.eduqationText_txt);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.lengthLine_txt);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.SelectLine_btn);
             this.Controls.Add(this.SelectRectangle_btn);
             this.Controls.Add(this.groupBox2);
@@ -686,8 +662,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.posY1r_textbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.posX2r_textbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.posX1r_textbox)).EndInit();
-            this.groupBox5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupPicturebox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -733,8 +707,6 @@
         private System.Windows.Forms.Button PictureRectangle_btn;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.PictureBox groupPicturebox;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lengthLine_txt;

@@ -7,3 +7,8 @@ bin/Debug/Lab1.pdb
 *.exe
 *.pdb
 *.cache
+.vscode/launch.json
+.vscode/tasks.json
+TextFile1.txt
+TextFile1.txt
+TextFile1.txt

@@ -25,6 +25,6 @@ C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная гра
 C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная графика\Lab1\Lab1\obj\Debug\Lab1.Form1.resources
 C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная графика\Lab1\Lab1\obj\Debug\Lab1.Properties.Resources.resources
 C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная графика\Lab1\Lab1\obj\Debug\Lab1.csproj.GenerateResource.cache
-C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная графика\Lab1\Lab1\obj\Debug\Lab1.csproj.CoreCompileInputs.cache
 C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная графика\Lab1\Lab1\obj\Debug\Lab1.exe
 C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная графика\Lab1\Lab1\obj\Debug\Lab1.pdb
+C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная графика\Lab1\Lab1\obj\Debug\Lab1.csproj.CoreCompileInputs.cache

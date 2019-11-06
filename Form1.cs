@@ -283,8 +283,8 @@ namespace Lab1
             int index = 1;
             while (index < 30)
             {
-                g.DrawString(Convert.ToString(index), new Font("Arial", 10), Brushes.Black, (index+1) * sizeDiv, indent - 20);
-                g.DrawString(Convert.ToString(index), new Font("Arial", 10), Brushes.Black, indent - 20, (index+1) * sizeDiv);
+                g.DrawString(Convert.ToString(index), new Font("Arial", 10), Brushes.Black, ((index + 1) * sizeDiv) - 7, indent - 20);
+                g.DrawString(Convert.ToString(index), new Font("Arial", 10), Brushes.Black, indent - 20, ((index + 1) * sizeDiv) - 7);
                 index++;
             }
 
@@ -468,8 +468,8 @@ namespace Lab1
         {
             pictureBox1.Image = null;
             pictureBox1.Update();
-            groupPicturebox.Image = null;
-            groupPicturebox.Update();
+            //groupPicturebox.Image = null;
+            //groupPicturebox.Update();
 
             Os_XY();
             dataGridView1.Rows.Clear();
@@ -562,8 +562,8 @@ namespace Lab1
         }
         private void PaintSelectLineList(List<List<object>> _list)
         {
-            groupPicturebox.Image = null;
-            groupPicturebox.Update();
+            //groupPicturebox.Image = null;
+            //groupPicturebox.Update();
 
             Graphics g = Graphics.FromImage(tempGroupDraw);
             g.Clear(Color.White);
@@ -579,7 +579,7 @@ namespace Lab1
             else
                 size = 600;
 
-            int startY = groupPicturebox.ClientRectangle.Height / 2;
+            int startY = 0; // = groupPicturebox.ClientRectangle.Height / 2;
 
             for (int i = 0; i < _list.Count; i++)
             {
@@ -604,7 +604,7 @@ namespace Lab1
                 }
             }
             groupDraw = (Bitmap)tempGroupDraw.Clone();
-            groupPicturebox.Image = groupDraw;
+            //groupPicturebox.Image = groupDraw;
         }
         private void CheckCheckedInTable() // Криво работает, не удаляет элементы, неккоректно добавляет.
                                            // Если элементы не связаны между собой - рисовать разрыв вместо соединения.
@@ -776,8 +776,8 @@ namespace Lab1
                 _Y *= 10;
             }
             RefreshPicture();
-            PaintPoint(ref snapshot, "", _X, _Y, Color.Red, lineWight);
-
+            PaintPoint(ref tempDraw, "", _X, _Y, Color.Red, lineWight);
+            snapshot = (Bitmap)tempDraw.Clone();
             textBox1.Text = $"{_X / sizeDiv - 1}:{_Y / sizeDiv - 1}";
         }
 
@@ -819,8 +819,8 @@ namespace Lab1
             InitializeComponent();
             snapshot = new Bitmap(pictureBox1.ClientRectangle.Width, pictureBox1.ClientRectangle.Height);
             tempDraw = (Bitmap)snapshot.Clone();
-            groupDraw = new Bitmap(groupPicturebox.ClientRectangle.Width, groupPicturebox.ClientRectangle.Height);
-            tempGroupDraw = (Bitmap)groupDraw.Clone();
+            //groupDraw = new Bitmap(groupPicturebox.ClientRectangle.Width, groupPicturebox.ClientRectangle.Height);
+            //tempGroupDraw = (Bitmap)groupDraw.Clone();
             foreColor = selectColor();
             lineWight = 2;
         }
