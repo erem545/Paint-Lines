@@ -28,3 +28,12 @@ C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная гра
 C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная графика\Lab1\Lab1\obj\Debug\Lab1.exe
 C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная графика\Lab1\Lab1\obj\Debug\Lab1.pdb
 C:\Учеба\ПНИПУ\3 курс\(Мухин) Компьютерная графика\Lab1\Lab1\obj\Debug\Lab1.csproj.CoreCompileInputs.cache
+D:\GitHub\Paint-Lines\bin\Debug\Lab1.exe.config
+D:\GitHub\Paint-Lines\bin\Debug\Lab1.exe
+D:\GitHub\Paint-Lines\bin\Debug\Lab1.pdb
+D:\GitHub\Paint-Lines\obj\Debug\Lab1.csprojAssemblyReference.cache
+D:\GitHub\Paint-Lines\obj\Debug\Lab1.Form1.resources
+D:\GitHub\Paint-Lines\obj\Debug\Lab1.Properties.Resources.resources
+D:\GitHub\Paint-Lines\obj\Debug\Lab1.csproj.GenerateResource.cache
+D:\GitHub\Paint-Lines\obj\Debug\Lab1.exe
+D:\GitHub\Paint-Lines\obj\Debug\Lab1.pdb

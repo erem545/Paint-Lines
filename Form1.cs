@@ -174,6 +174,15 @@ namespace Lab1
             double length = Math.Sqrt((l1 * l1) + (l2 * l2));
             lengthLine_txt.Text = $"Длина {_line.ToString()}: {length}";
         }
+        private void PullMatrix(Line _line)
+        {
+            matrix11_textbox.Text = _line.Matrix[0, 0].ToString();
+            matrix12_textbox.Text = _line.Matrix[0, 1].ToString();
+            //matrix13_textbox.Text = _line.Matrix[0, 2].ToString();
+            matrix21_textbox.Text = _line.Matrix[1, 0].ToString();
+            matrix22_textbox.Text = _line.Matrix[1, 1].ToString();
+            //matrix23_textbox.Text = _line.Matrix[1, 2].ToString();
+        }
 
         private void RefreshPicture()
         {
@@ -196,7 +205,7 @@ namespace Lab1
         /// <param name="_lineWeight">Толщина линии</param>
         /// <param name="_pointSize">Размер точки (0 - стандартно (_lineWeight), 1, 2, 3,... - Увеличение точки)</param>
         private void PaintLine(ref Bitmap _screen, Line _line, Color _color, int _lineWeight, int _pointSize)
-        {
+        {           
             tempDraw = _screen;
             Graphics g = Graphics.FromImage(tempDraw);
 
@@ -550,7 +559,8 @@ namespace Lab1
                 LinesListGroup.Add(CreateObjFromLine(_line));
 
             CalculateLengthLine(_line);
-            eduqationText_txt.Text = MatrixSystem.EquationLine(_line);
+            eduqationText_txt.Text = _line.Equation_val.ToString();
+            PullMatrix(_line);
             pictureBox1.Image = snapshot;
         }
         private bool CheckSelected()
@@ -784,6 +794,29 @@ namespace Lab1
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             pictureBox1.Image = snapshot;        
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            // Выбранный элемент таблицы
+
+            try
+            {
+                int index = dataGridView1.CurrentRow.Index;
+                if (index < LinesList.Count)
+                {
+                    Line _line = CreateLineFromObj(LinesList.ElementAt(index));
+                    EditingCapability.StretchShrink(ref _line, 1.05f);
+                    LinesList[0] = CreateObjFromLine(_line);
+
+                    FillTableWithList(LinesList);
+                    RefreshPicture();
+                }
+            }
+            catch (NullReferenceException)
+            {
+                return;
+            }
         }
 
         #endregion
